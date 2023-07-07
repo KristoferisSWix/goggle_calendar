@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google Calendar Clone</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link defer rel="preconnect" href="https://fonts.googleapis.com" />
+    <link defer rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      defer
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-calendar-controls">
+        <button class="hamburger-menu">
+          <img src="./images/hamburger-icon.svg" alt="menu icon" />
+        </button>
+        <h2 class="header-heading">Calendar</h2>
+        <button class="header-button">Today</button>
+        <button class="timeframe-control">
+          <img
+            src="./images/chevron-left-solid.svg"
+            alt="change timeframe to past"
+          />
+        </button>
+        <button class="timeframe-control">
+          <img
+            src="./images/chevron-right-solid.svg"
+            alt="change timeframe to future"
+          />
+        </button>
+        <h3 class="header-heading">May 2021</h3>
+      </div>
+
+      <select name="timeframe" class="header-button timeframe-controls">
+        <option value="day">Day</option>
+        <option value="week">Week</option>
+        <option value="month">Month</option>
+        <option value="year">Year</option>
+        <option value="schedule">Schedule</option>
+        <option value="4-days">4 days</option>
+      </select>
+    </header>
+    <main class="main">
+      <aside class="sidebar">
+        <button class="create-event">Create Event</button>
+        <article class="sidebar-calendar">
+          <section class="sidebar-calendar-header">
+            <h5 class="sidebar-calendar-heading">May 2021</h5>
+            <div class="sidebar-calendar-controls">
+              <button class="sidebar-calendar-control-btn">
+                <img
+                  src="./images/chevron-left-solid.svg"
+                  alt="go to previous month"
+                />
+              </button>
+              <button class="sidebar-calendar-control-btn">
+                <img
+                  src="./images/chevron-right-solid.svg"
+                  alt="go to next month"
+                />
+              </button>
+            </div>
+          </section>
+          <table class="sidebar-calendar-table">
+            <thead>
+              <tr>
+                <th class="sidebar-calendar-th">M</th>
+                <th class="sidebar-calendar-th">T</th>
+                <th class="sidebar-calendar-th">W</th>
+                <th class="sidebar-calendar-th">T</th>
+                <th class="sidebar-calendar-th">F</th>
+                <th class="sidebar-calendar-th">S</th>
+                <th class="sidebar-calendar-th">S</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="sidebar-calendar-td sidebar-calendar-td-not-current">
+                  26
+                </td>
+                <td class="sidebar-calendar-td sidebar-calendar-td-not-current">
+                  27
+                </td>
+                <td class="sidebar-calendar-td sidebar-calendar-td-not-current">
+                  28
+                </td>
+                <td class="sidebar-calendar-td sidebar-calendar-td-not-current">
+                  29
+                </td>
+                <td class="sidebar-calendar-td sidebar-calendar-td-not-current">
+                  30
+                </td>
+                <td class="sidebar-calendar-td">1</td>
+                <td class="sidebar-calendar-td">2</td>
+              </tr>
+              <tr>
+                <td class="sidebar-calendar-td">3</td>
+                <td class="sidebar-calendar-td">4</td>
+                <td class="sidebar-calendar-td">5</td>
+                <td class="sidebar-calendar-td">6</td>
+                <td class="sidebar-calendar-td">7</td>
+                <td class="sidebar-calendar-td">8</td>
+                <td class="sidebar-calendar-td">9</td>
+              </tr>
+              <tr>
+                <td class="sidebar-calendar-td">10</td>
+                <td class="sidebar-calendar-td">11</td>
+                <td class="sidebar-calendar-td">12</td>
+                <td class="sidebar-calendar-td">13</td>
+                <td class="sidebar-calendar-td">14</td>
+                <td class="sidebar-calendar-td">15</td>
+                <td class="sidebar-calendar-td">16</td>
+              </tr>
+              <tr>
+                <td class="sidebar-calendar-td">17</td>
+                <td class="sidebar-calendar-td">18</td>
+                <td class="sidebar-calendar-td">19</td>
+                <td class="sidebar-calendar-td">20</td>
+                <td class="sidebar-calendar-td">21</td>
+                <td class="sidebar-calendar-td">22</td>
+                <td class="sidebar-calendar-td">23</td>
+              </tr>
+              <tr>
+                <td class="sidebar-calendar-td">24</td>
+                <td class="sidebar-calendar-td">25</td>
+                <td class="sidebar-calendar-td">26</td>
+                <td class="sidebar-calendar-td">27</td>
+                <td class="sidebar-calendar-td sidebar-calendar-td-active">
+                  28
+                </td>
+                <td class="sidebar-calendar-td">29</td>
+                <td class="sidebar-calendar-td">30</td>
+              </tr>
+              <tr>
+                <td class="sidebar-calendar-td">31</td>
+                <td class="sidebar-calendar-td sidebar-calendar-td-not-current">
+                  1
+                </td>
+                <td class="sidebar-calendar-td sidebar-calendar-td-not-current">
+                  2
+                </td>
+                <td class="sidebar-calendar-td sidebar-calendar-td-not-current">
+                  3
+                </td>
+                <td class="sidebar-calendar-td sidebar-calendar-td-not-current">
+                  4
+                </td>
+                <td class="sidebar-calendar-td sidebar-calendar-td-not-current">
+                  5
+                </td>
+                <td class="sidebar-calendar-td sidebar-calendar-td-not-current">
+                  6
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+      </aside>
+      <section class="calendar-display">
+        <table class="main-calendar-table">
+          <thead class="main-calendar-thead">
+            <tr>
+              <th class="main-calendar-th-first">
+                <h3 class="main-calendar-th-heading-first">GMT+03</h3>
+              </th>
+              <th class="main-calendar-th">
+                <h3 class="main-calendar-th-heading">
+                  MON <br /><span class="main-calendar-th-heading-number"
+                    >24</span
+                  >
+                </h3>
+              </th>
+              <th class="main-calendar-th">
+                <h3 class="main-calendar-th-heading">
+                  TUE <br /><span class="main-calendar-th-heading-number"
+                    >25</span
+                  >
+                </h3>
+              </th>
+              <th class="main-calendar-th">
+                <h3 class="main-calendar-th-heading">
+                  WED <br /><span class="main-calendar-th-heading-number"
+                    >26</span
+                  >
+                </h3>
+              </th>
+              <th class="main-calendar-th">
+                <h3 class="main-calendar-th-heading">
+                  THU <br /><span class="main-calendar-th-heading-number"
+                    >27</span
+                  >
+                </h3>
+              </th>
+              <th class="main-calendar-th">
+                <h3
+                  class="main-calendar-th-heading main-calendar-th-heading-active"
+                >
+                  FRI <br /><span
+                    class="main-calendar-th-heading-number main-calendar-th-heading-number-active"
+                    >28</span
+                  >
+                </h3>
+              </th>
+              <th class="main-calendar-th">
+                <h3 class="main-calendar-th-heading">
+                  SAT <br /><span class="main-calendar-th-heading-number"
+                    >29</span
+                  >
+                </h3>
+              </th>
+              <th class="main-calendar-th">
+                <h3 class="main-calendar-th-heading">
+                  SUN <br /><span class="main-calendar-th-heading-number"
+                    >30</span
+                  >
+                </h3>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="main-calendar-td-first">
+                <p class="main-calendar-td-first-content">01:00</p>
+              </td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+            </tr>
+            <tr>
+              <td class="main-calendar-td-first">
+                <p class="main-calendar-td-first-content">02:00</p>
+              </td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+            </tr>
+            <tr>
+              <td class="main-calendar-td-first">
+                <p class="main-calendar-td-first-content">03:00</p>
+              </td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+            </tr>
+            <tr>
+              <td class="main-calendar-td-first">
+                <p class="main-calendar-td-first-content">04:00</p>
+              </td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+            </tr>
+            <tr>
+              <td class="main-calendar-td-first">
+                <p class="main-calendar-td-first-content">05:00</p>
+              </td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+            </tr>
+            <tr>
+              <td class="main-calendar-td-first">
+                <p class="main-calendar-td-first-content">06:00</p>
+              </td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+            </tr>
+            <tr>
+              <td class="main-calendar-td-first">
+                <p class="main-calendar-td-first-content">07:00</p>
+              </td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+            </tr>
+            <tr>
+              <td class="main-calendar-td-first">
+                <p class="main-calendar-td-first-content">08:00</p>
+              </td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+            </tr>
+            <tr>
+              <td class="main-calendar-td-first">
+                <p class="main-calendar-td-first-content">09:00</p>
+              </td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+            </tr>
+            <tr>
+              <td class="main-calendar-td-first">
+                <p class="main-calendar-td-first-content">10:00</p>
+              </td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+            </tr>
+            <tr>
+              <td class="main-calendar-td-first">
+                <p class="main-calendar-td-first-content">11:00</p>
+              </td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+            </tr>
+            <tr>
+              <td class="main-calendar-td-first">
+                <p class="main-calendar-td-first-content">12:00</p>
+              </td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+            </tr>
+            <tr>
+              <td class="main-calendar-td-first">
+                <p class="main-calendar-td-first-content">13:00</p>
+              </td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+            </tr>
+            <tr>
+              <td class="main-calendar-td-first">
+                <p class="main-calendar-td-first-content">14:00</p>
+              </td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+            </tr>
+            <tr>
+              <td class="main-calendar-td-first">
+                <p class="main-calendar-td-first-content">15:00</p>
+              </td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+            </tr>
+            <tr>
+              <td class="main-calendar-td-first">
+                <p class="main-calendar-td-first-content">16:00</p>
+              </td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+            </tr>
+            <tr>
+              <td class="main-calendar-td-first">
+                <p class="main-calendar-td-first-content">17:00</p>
+              </td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+            </tr>
+            <tr>
+              <td class="main-calendar-td-first">
+                <p class="main-calendar-td-first-content">18:00</p>
+              </td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+            </tr>
+            <tr>
+              <td class="main-calendar-td-first">
+                <p class="main-calendar-td-first-content">19:00</p>
+              </td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+            </tr>
+            <tr>
+              <td class="main-calendar-td-first">
+                <p class="main-calendar-td-first-content">20:00</p>
+              </td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+            </tr>
+            <tr>
+              <td class="main-calendar-td-first">
+                <p class="main-calendar-td-first-content">21:00</p>
+              </td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+            </tr>
+            <tr>
+              <td class="main-calendar-td-first">
+                <p class="main-calendar-td-first-content">22:00</p>
+              </td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+            </tr>
+            <tr>
+              <td class="main-calendar-td-first">
+                <p class="main-calendar-td-first-content">23:00</p>
+              </td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+            </tr>
+            <tr>
+              <td class="main-calendar-td-first">
+                <p class="main-calendar-td-first-content"></p>
+              </td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+              <td class="main-calendar-td"></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </body>
+</html>
