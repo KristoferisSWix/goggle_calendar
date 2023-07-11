@@ -16,18 +16,18 @@
   <body>
     <header class="header">
       <div class="header-calendar-controls">
-        <button class="hamburger-menu">
-          <img src="./images/hamburger-icon.svg" alt="menu icon" />
+        <button class="hover-background hamburger-menu">
+          <img src="./images/hamburger-icon.svg" alt="menu button" />
         </button>
         <h2 class="header-heading">Calendar</h2>
-        <button class="header-button">Today</button>
-        <button class="timeframe-control">
+        <button class="hover-background header-button">Today</button>
+        <button class="hover-background timeframe-control">
           <img
             src="./images/chevron-left-icon.svg"
             alt="change timeframe to past"
           />
         </button>
-        <button class="timeframe-control">
+        <button class="hover-background timeframe-control">
           <img
             src="./images/chevron-right-icon.svg"
             alt="change timeframe to future"
@@ -38,7 +38,7 @@
 
       <select
         name="timeframe"
-        class="select-chevron-down header-button timeframe-select"
+        class="hover-background select-chevron-down header-button timeframe-select"
       >
         <option value="day">Day</option>
         <option value="week">Week</option>
@@ -50,18 +50,18 @@
     </header>
     <main class="main">
       <aside class="sidebar">
-        <button class="create-event">Create Event</button>
+        <button class="hover-background create-event">Create Event</button>
         <article class="sidebar-calendar">
           <section class="sidebar-calendar-header">
             <h5 class="sidebar-calendar-heading">May 2021</h5>
             <div class="sidebar-calendar-controls">
-              <button class="sidebar-calendar-control-btn">
+              <button class="hover-background sidebar-calendar-control-btn">
                 <img
                   src="./images/chevron-left-icon.svg"
                   alt="go to previous month"
                 />
               </button>
-              <button class="sidebar-calendar-control-btn">
+              <button class="hover-background sidebar-calendar-control-btn">
                 <img
                   src="./images/chevron-right-icon.svg"
                   alt="go to next month"
@@ -171,35 +171,27 @@
               <th class="main-calendar-th-first">
                 <h3 class="main-calendar-th-heading-first">GMT+03</h3>
               </th>
-              <th class="main-calendar-th">
+              <th>
                 <h3 class="main-calendar-th-heading">
-                  MON <br /><span class="main-calendar-th-heading-number"
-                    >24</span
-                  >
+                  MON <br /><span>24</span>
                 </h3>
               </th>
-              <th class="main-calendar-th">
+              <th>
                 <h3 class="main-calendar-th-heading">
-                  TUE <br /><span class="main-calendar-th-heading-number"
-                    >25</span
-                  >
+                  TUE <br /><span>25</span>
                 </h3>
               </th>
-              <th class="main-calendar-th">
+              <th>
                 <h3 class="main-calendar-th-heading">
-                  WED <br /><span class="main-calendar-th-heading-number"
-                    >26</span
-                  >
+                  WED <br /><span>26</span>
                 </h3>
               </th>
-              <th class="main-calendar-th">
+              <th>
                 <h3 class="main-calendar-th-heading">
-                  THU <br /><span class="main-calendar-th-heading-number"
-                    >27</span
-                  >
+                  THU <br /><span>27</span>
                 </h3>
               </th>
-              <th class="main-calendar-th">
+              <th>
                 <h3
                   class="main-calendar-th-heading main-calendar-th-heading-active"
                 >
@@ -209,18 +201,14 @@
                   >
                 </h3>
               </th>
-              <th class="main-calendar-th">
+              <th>
                 <h3 class="main-calendar-th-heading">
-                  SAT <br /><span class="main-calendar-th-heading-number"
-                    >29</span
-                  >
+                  SAT <br /><span>29</span>
                 </h3>
               </th>
-              <th class="main-calendar-th">
+              <th>
                 <h3 class="main-calendar-th-heading">
-                  SUN <br /><span class="main-calendar-th-heading-number"
-                    >30</span
-                  >
+                  SUN <br /><span>30</span>
                 </h3>
               </th>
             </tr>
@@ -520,139 +508,144 @@
       <section class="event-modal-overlay">
         <div class="event-modal">
           <div class="event-modal-header">
-            <button class="event-modal-close-btn">
-              <img src="./images/xmark-icon.svg" alt="close modal icon" />
+            <button class="hover-background event-modal-close-btn">
+              <img src="./images/xmark-icon.svg" alt="close modal" />
             </button>
           </div>
-          <!-- ar pridet label ir tsg padaryt kad jo nerenderintu? -->
-          <input
-            type="text"
-            name="event-title-input"
-            class="event-title-input"
-            placeholder="Add title"
-          />
-          <div class="event-option-container event-time-container">
+          <div class="event-title-container">
+            <input
+              type="text"
+              name="event-title-input"
+              class="event-title-input"
+              placeholder="Add title"
+            />
+          </div>
+          <div class="event-option-container">
             <label for="event-time-input" class="event-option-label-icon"
-              ><img src="./images/clock-icon.svg" alt="clock icon"
+              ><img src="./images/clock-icon.svg" alt="date and time"
             /></label>
             <input
               type="datetime-local"
               name="event-time-input"
               id="event-time-input"
-              class="event-time-input"
+              class="event-fields-formating"
             />
           </div>
-          <div class="event-option-container event-guest-container">
+          <div class="event-option-container">
             <label for="event-guest-input" class="event-option-label-icon"
-              ><img src="./images/users-icon.svg" alt="guests icon"
+              ><img src="./images/users-icon.svg" alt="guests"
             /></label>
             <input
               type="text"
               id="event-guest-input"
-              class="event-guest-input"
+              class="event-fields-formating"
               placeholder="Add guests"
             />
           </div>
-          <div class="event-option-container event-conference-container">
+          <div class="event-option-container">
             <img
               src="./images/video-icon.svg"
-              alt="conference icon"
+              alt="video conference"
               class="event-option-label-icon"
             />
-            <button class="event-conference-btn">Add video conferencing</button>
+            <button
+              class="hover-background event-conference-btn event-fields-formating"
+            >
+              Add video conferencing
+            </button>
           </div>
-          <div class="event-option-container event-room-container">
+          <div class="event-option-container">
             <label for="event-room-input" class="event-option-label-icon">
-              <img src="./images/door-icon.svg" alt="room icon" />
+              <img src="./images/door-icon.svg" alt="meeting room" />
             </label>
             <input
               type="text"
               id="event-room-input"
-              class="event-room-input"
+              class="event-fields-formating"
               placeholder="Add room"
             />
           </div>
-          <div class="event-option-container event-location-container">
+          <div class="event-option-container">
             <label for="event-location-input" class="event-option-label-icon">
-              <img src="./images/location-icon.svg" alt="location icon" />
+              <img src="./images/location-icon.svg" alt="location" />
             </label>
             <input
               type="text"
               id="event-location-input"
-              class="event-location-input"
+              class="event-fields-formating"
               placeholder="Add location"
             />
           </div>
-          <div class="event-option-container event-description-container">
+          <div class="event-option-container">
             <label
               for="event-description-input"
               class="event-option-label-icon"
             >
-              <img src="./images/message-icon.svg" alt="description icon" />
+              <img src="./images/message-icon.svg" alt="description" />
             </label>
             <input
               type="text"
               id="event-description-input"
-              class="event-description-input"
+              class="event-fields-formating"
               placeholder="Add description"
             />
           </div>
-          <div class="event-option-container event-attachment-container">
+          <div class="event-option-container">
             <label for="event-attachment-input" class="event-option-label-icon">
-              <img src="./images/paperclip-icon.svg" alt="attachment icon" />
+              <img src="./images/paperclip-icon.svg" alt="file attachment" />
             </label>
             <input
               type="file"
               id="event-attachment-input"
-              placeholder="Add attachment"
+              class="event-fields-formating"
             />
           </div>
-          <div class="event-option-container event-host-container">
+          <div class="event-option-container">
             <img
               src="./images/calendar-icon.svg"
-              alt="host icon"
+              alt="host details"
               class="event-option-label-icon"
             />
-            <h3 class="event-host-heading">Kristoferis Solovjov</h3>
+            <h3 class="event-fields-formating">Kristoferis Solovjov</h3>
           </div>
-          <div class="event-option-container event-status-container">
+          <div class="event-option-container">
             <img
               src="./images/briefcase-icon.svg"
-              alt="status icon"
+              alt="event status"
               class="event-option-label-icon"
             />
             <select
               name="status"
-              class="event-status-input select-chevron-down"
+              class="hover-background event-fields-formating select-chevron-down event-select-formating"
             >
               <option value="busy">Busy</option>
               <option value="free">Free</option>
             </select>
           </div>
-          <div class="event-option-container event-visibility-container">
+          <div class="event-option-container">
             <img
               src="./images/lock-icon.svg"
-              alt="visibility icon"
+              alt="event visibility"
               class="event-option-label-icon"
             />
             <select
               name="visibility"
-              class="select-chevron-down event-visibility-input"
+              class="hover-background event-fields-formating select-chevron-down event-select-formating"
             >
               <option value="default">Default visibility</option>
               <option value="public">Public</option>
               <option value="private">Private</option>
             </select>
           </div>
-          <div class="event-option-container event-alert-container">
+          <div class="event-option-container">
             <img
               src="./images/alert-icon.svg"
-              alt="alert icon"
+              alt="event alert"
               class="event-option-label-icon"
             />
             <select
               name="alert-time"
-              class="select-chevron-down event-alert-input"
+              class="hover-background event-fields-formating select-chevron-down event-select-formating"
             >
               <option value="5min">5 minutes before</option>
               <option value="10min">10 minutes before</option>
@@ -664,8 +657,10 @@
             </select>
           </div>
           <div class="event-modal-footer">
-            <button class="event-modal-more-options-btn">More options</button>
-            <button class="event-modal-save-btn">Save</button>
+            <button class="hover-background event-modal-more-options-btn">
+              More options
+            </button>
+            <button class="hover-background event-modal-save-btn">Save</button>
           </div>
         </div>
       </section>
