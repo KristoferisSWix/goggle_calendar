@@ -14,6 +14,14 @@ select {
   transition: 0.2s ease;
   cursor: pointer;
 }
+.select-chevron-down {
+  appearance: none;
+  background: url("./images/chevron-down-icon.svg");
+  background-repeat: no-repeat;
+  background-size: 15px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
 button:hover,
 select:hover {
   background-color: rgba(211, 211, 211, 0.267);
@@ -67,15 +75,9 @@ img {
   padding: 7px 11px;
   border-radius: 50%;
 }
-.timeframe-controls {
+.timeframe-select {
   padding-right: 35px;
-  appearance: none;
-  background: url("./images/chevron-down-icon.svg");
   background-position: right 10px top 9px;
-  background-repeat: no-repeat;
-  background-size: 15px;
-  -moz-appearance: none;
-  -webkit-appearance: none;
 }
 
 .main {
@@ -214,4 +216,110 @@ img {
 .main-calendar-td {
   border: 1px solid lightgray;
   height: 50px;
+}
+
+/* Event modal */
+.event-modal-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.346);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.event-modal {
+  background: white;
+  border-radius: 10px;
+  display: grid;
+  gap: 15px;
+  overflow: hidden;
+  width: 50vw;
+}
+.event-option-container {
+  padding-inline: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.event-option-label-icon {
+  width: 20px;
+}
+.event-modal-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 35px;
+  background: rgba(211, 211, 211, 0.246);
+}
+.event-modal-close-btn {
+  width: 32px;
+  height: 30px;
+  padding: 4px 8px 5px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+.event-title-input {
+  margin-left: 60px;
+  margin-right: 20px;
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 1px;
+  transition: 0.2s ease;
+  font-size: 22px;
+}
+
+.event-title-input:focus {
+  border-bottom: 2px solid rgb(0, 110, 255);
+  padding-bottom: 0px;
+  /* kaip padaryt kad paplatejant borderiui jis nejudintu visko containeri */
+}
+.event-conference-btn {
+  background: rgb(0, 110, 255);
+  color: white;
+  padding: 8px 10px;
+  border-radius: 5px;
+}
+.event-time-input,
+.event-guest-input,
+.event-conference-btn,
+.event-room-input,
+.event-location-input,
+.event-description-input,
+.event-attachment-input,
+.event-host-heading,
+.event-status-input,
+.event-visibility-input,
+.event-alert-input {
+  font-size: 14px;
+  font-weight: 400;
+}
+.event-modal-footer {
+  padding: 20px 20px 5px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+}
+.event-modal-save-btn {
+  background: rgb(0, 110, 255);
+  color: white;
+  padding: 10px 30px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+.event-modal-more-options-btn {
+  font-size: 16px;
+  color: gray;
+}
+.event-status-input,
+.event-visibility-input,
+.event-alert-input {
+  position: relative;
+  left: -10px;
+  padding: 5px 35px 5px 10px;
+  border-radius: 5px;
+  background-position: right 10px top 5px;
 }

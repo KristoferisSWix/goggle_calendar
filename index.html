@@ -23,20 +23,23 @@
         <button class="header-button">Today</button>
         <button class="timeframe-control">
           <img
-            src="./images/chevron-left-solid.svg"
+            src="./images/chevron-left-icon.svg"
             alt="change timeframe to past"
           />
         </button>
         <button class="timeframe-control">
           <img
-            src="./images/chevron-right-solid.svg"
+            src="./images/chevron-right-icon.svg"
             alt="change timeframe to future"
           />
         </button>
         <h3 class="header-heading">May 2021</h3>
       </div>
 
-      <select name="timeframe" class="header-button timeframe-controls">
+      <select
+        name="timeframe"
+        class="select-chevron-down header-button timeframe-select"
+      >
         <option value="day">Day</option>
         <option value="week">Week</option>
         <option value="month">Month</option>
@@ -54,13 +57,13 @@
             <div class="sidebar-calendar-controls">
               <button class="sidebar-calendar-control-btn">
                 <img
-                  src="./images/chevron-left-solid.svg"
+                  src="./images/chevron-left-icon.svg"
                   alt="go to previous month"
                 />
               </button>
               <button class="sidebar-calendar-control-btn">
                 <img
-                  src="./images/chevron-right-solid.svg"
+                  src="./images/chevron-right-icon.svg"
                   alt="go to next month"
                 />
               </button>
@@ -513,6 +516,158 @@
             </tr>
           </tbody>
         </table>
+      </section>
+      <section class="event-modal-overlay">
+        <div class="event-modal">
+          <div class="event-modal-header">
+            <button class="event-modal-close-btn">
+              <img src="./images/xmark-icon.svg" alt="close modal icon" />
+            </button>
+          </div>
+          <!-- ar pridet label ir tsg padaryt kad jo nerenderintu? -->
+          <input
+            type="text"
+            name="event-title-input"
+            class="event-title-input"
+            placeholder="Add title"
+          />
+          <div class="event-option-container event-time-container">
+            <label for="event-time-input" class="event-option-label-icon"
+              ><img src="./images/clock-icon.svg" alt="clock icon"
+            /></label>
+            <input
+              type="datetime-local"
+              name="event-time-input"
+              id="event-time-input"
+              class="event-time-input"
+            />
+          </div>
+          <div class="event-option-container event-guest-container">
+            <label for="event-guest-input" class="event-option-label-icon"
+              ><img src="./images/users-icon.svg" alt="guests icon"
+            /></label>
+            <input
+              type="text"
+              id="event-guest-input"
+              class="event-guest-input"
+              placeholder="Add guests"
+            />
+          </div>
+          <div class="event-option-container event-conference-container">
+            <img
+              src="./images/video-icon.svg"
+              alt="conference icon"
+              class="event-option-label-icon"
+            />
+            <button class="event-conference-btn">Add video conferencing</button>
+          </div>
+          <div class="event-option-container event-room-container">
+            <label for="event-room-input" class="event-option-label-icon">
+              <img src="./images/door-icon.svg" alt="room icon" />
+            </label>
+            <input
+              type="text"
+              id="event-room-input"
+              class="event-room-input"
+              placeholder="Add room"
+            />
+          </div>
+          <div class="event-option-container event-location-container">
+            <label for="event-location-input" class="event-option-label-icon">
+              <img src="./images/location-icon.svg" alt="location icon" />
+            </label>
+            <input
+              type="text"
+              id="event-location-input"
+              class="event-location-input"
+              placeholder="Add location"
+            />
+          </div>
+          <div class="event-option-container event-description-container">
+            <label
+              for="event-description-input"
+              class="event-option-label-icon"
+            >
+              <img src="./images/message-icon.svg" alt="description icon" />
+            </label>
+            <input
+              type="text"
+              id="event-description-input"
+              class="event-description-input"
+              placeholder="Add description"
+            />
+          </div>
+          <div class="event-option-container event-attachment-container">
+            <label for="event-attachment-input" class="event-option-label-icon">
+              <img src="./images/paperclip-icon.svg" alt="attachment icon" />
+            </label>
+            <input
+              type="file"
+              id="event-attachment-input"
+              placeholder="Add attachment"
+            />
+          </div>
+          <div class="event-option-container event-host-container">
+            <img
+              src="./images/calendar-icon.svg"
+              alt="host icon"
+              class="event-option-label-icon"
+            />
+            <h3 class="event-host-heading">Kristoferis Solovjov</h3>
+          </div>
+          <div class="event-option-container event-status-container">
+            <img
+              src="./images/briefcase-icon.svg"
+              alt="status icon"
+              class="event-option-label-icon"
+            />
+            <select
+              name="status"
+              class="event-status-input select-chevron-down"
+            >
+              <option value="busy">Busy</option>
+              <option value="free">Free</option>
+            </select>
+          </div>
+          <div class="event-option-container event-visibility-container">
+            <img
+              src="./images/lock-icon.svg"
+              alt="visibility icon"
+              class="event-option-label-icon"
+            />
+            <select
+              name="visibility"
+              class="select-chevron-down event-visibility-input"
+            >
+              <option value="default">Default visibility</option>
+              <option value="public">Public</option>
+              <option value="private">Private</option>
+            </select>
+          </div>
+          <div class="event-option-container event-alert-container">
+            <img
+              src="./images/alert-icon.svg"
+              alt="alert icon"
+              class="event-option-label-icon"
+            />
+            <select
+              name="alert-time"
+              class="select-chevron-down event-alert-input"
+            >
+              <option value="5min">5 minutes before</option>
+              <option value="10min">10 minutes before</option>
+              <option value="15min">15 minutes before</option>
+              <option value="30min">30 minutes before</option>
+              <option value="1hour">1 hour before</option>
+              <option value="1day">1 day before</option>
+              <option value="none">None</option>
+            </select>
+          </div>
+          <div class="event-modal-footer">
+            <button class="event-modal-more-options-btn">More options</button>
+            <button class="event-modal-save-btn">Save</button>
+          </div>
+        </div>
       </section>
     </main>
   </body>
