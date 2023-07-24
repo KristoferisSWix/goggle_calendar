@@ -20,20 +20,22 @@
           <img src="./images/hamburger-icon.svg" alt="menu button" />
         </button>
         <h2 class="header-heading">Calendar</h2>
-        <button class="hover-background header-button">Today</button>
-        <button class="hover-background timeframe-control">
+        <button class="hover-background header-button" id="show-today-btn">
+          Today
+        </button>
+        <button class="hover-background timeframe-control" id="prev-period-btn">
           <img
             src="./images/chevron-left-icon.svg"
             alt="change timeframe to past"
           />
         </button>
-        <button class="hover-background timeframe-control">
+        <button class="hover-background timeframe-control" id="next-period-btn">
           <img
             src="./images/chevron-right-icon.svg"
             alt="change timeframe to future"
           />
         </button>
-        <h3 class="header-heading">May 2021</h3>
+        <h3 class="header-heading" id="header-date"></h3>
       </div>
 
       <select
@@ -41,7 +43,7 @@
         class="hover-background select-chevron-down header-button timeframe-select"
       >
         <option value="day">Day</option>
-        <option value="week">Week</option>
+        <option value="week" selected>Week</option>
         <option value="month">Month</option>
         <option value="year">Year</option>
         <option value="schedule">Schedule</option>
@@ -50,18 +52,29 @@
     </header>
     <main class="main">
       <aside class="sidebar">
-        <button class="hover-background create-event">Create Event</button>
+        <button class="hover-background create-event" id="create-event-btn">
+          Create Event
+        </button>
         <article class="sidebar-calendar">
           <section class="sidebar-calendar-header">
-            <h5 class="sidebar-calendar-heading">May 2021</h5>
+            <h5
+              class="sidebar-calendar-heading"
+              id="sidebar-calendar-date"
+            ></h5>
             <div class="sidebar-calendar-controls">
-              <button class="hover-background sidebar-calendar-control-btn">
+              <button
+                class="hover-background sidebar-calendar-control-btn"
+                id="sidebar-calendar-previous-period"
+              >
                 <img
                   src="./images/chevron-left-icon.svg"
                   alt="go to previous month"
                 />
               </button>
-              <button class="hover-background sidebar-calendar-control-btn">
+              <button
+                class="hover-background sidebar-calendar-control-btn"
+                id="sidebar-calendar-next-period"
+              >
                 <img
                   src="./images/chevron-right-icon.svg"
                   alt="go to next month"
@@ -72,148 +85,32 @@
           <table class="sidebar-calendar-table">
             <thead>
               <tr>
+                <th class="sidebar-calendar-th">S</th>
                 <th class="sidebar-calendar-th">M</th>
                 <th class="sidebar-calendar-th">T</th>
                 <th class="sidebar-calendar-th">W</th>
                 <th class="sidebar-calendar-th">T</th>
                 <th class="sidebar-calendar-th">F</th>
                 <th class="sidebar-calendar-th">S</th>
-                <th class="sidebar-calendar-th">S</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td class="sidebar-calendar-td sidebar-calendar-td-not-current">
-                  26
-                </td>
-                <td class="sidebar-calendar-td sidebar-calendar-td-not-current">
-                  27
-                </td>
-                <td class="sidebar-calendar-td sidebar-calendar-td-not-current">
-                  28
-                </td>
-                <td class="sidebar-calendar-td sidebar-calendar-td-not-current">
-                  29
-                </td>
-                <td class="sidebar-calendar-td sidebar-calendar-td-not-current">
-                  30
-                </td>
-                <td class="sidebar-calendar-td">1</td>
-                <td class="sidebar-calendar-td">2</td>
-              </tr>
-              <tr>
-                <td class="sidebar-calendar-td">3</td>
-                <td class="sidebar-calendar-td">4</td>
-                <td class="sidebar-calendar-td">5</td>
-                <td class="sidebar-calendar-td">6</td>
-                <td class="sidebar-calendar-td">7</td>
-                <td class="sidebar-calendar-td">8</td>
-                <td class="sidebar-calendar-td">9</td>
-              </tr>
-              <tr>
-                <td class="sidebar-calendar-td">10</td>
-                <td class="sidebar-calendar-td">11</td>
-                <td class="sidebar-calendar-td">12</td>
-                <td class="sidebar-calendar-td">13</td>
-                <td class="sidebar-calendar-td">14</td>
-                <td class="sidebar-calendar-td">15</td>
-                <td class="sidebar-calendar-td">16</td>
-              </tr>
-              <tr>
-                <td class="sidebar-calendar-td">17</td>
-                <td class="sidebar-calendar-td">18</td>
-                <td class="sidebar-calendar-td">19</td>
-                <td class="sidebar-calendar-td">20</td>
-                <td class="sidebar-calendar-td">21</td>
-                <td class="sidebar-calendar-td">22</td>
-                <td class="sidebar-calendar-td">23</td>
-              </tr>
-              <tr>
-                <td class="sidebar-calendar-td">24</td>
-                <td class="sidebar-calendar-td">25</td>
-                <td class="sidebar-calendar-td">26</td>
-                <td class="sidebar-calendar-td">27</td>
-                <td class="sidebar-calendar-td sidebar-calendar-td-active">
-                  28
-                </td>
-                <td class="sidebar-calendar-td">29</td>
-                <td class="sidebar-calendar-td">30</td>
-              </tr>
-              <tr>
-                <td class="sidebar-calendar-td">31</td>
-                <td class="sidebar-calendar-td sidebar-calendar-td-not-current">
-                  1
-                </td>
-                <td class="sidebar-calendar-td sidebar-calendar-td-not-current">
-                  2
-                </td>
-                <td class="sidebar-calendar-td sidebar-calendar-td-not-current">
-                  3
-                </td>
-                <td class="sidebar-calendar-td sidebar-calendar-td-not-current">
-                  4
-                </td>
-                <td class="sidebar-calendar-td sidebar-calendar-td-not-current">
-                  5
-                </td>
-                <td class="sidebar-calendar-td sidebar-calendar-td-not-current">
-                  6
-                </td>
-              </tr>
-            </tbody>
+            <tbody id="sidebar-calendar"></tbody>
           </table>
         </article>
       </aside>
       <section class="calendar-display">
         <table class="main-calendar-table">
           <thead class="main-calendar-thead">
-            <tr>
+            <tr id="main-calendar-head">
               <th class="main-calendar-th-first">
-                <h3 class="main-calendar-th-heading-first">GMT+03</h3>
-              </th>
-              <th>
-                <h3 class="main-calendar-th-heading">
-                  MON <br /><span>24</span>
-                </h3>
-              </th>
-              <th>
-                <h3 class="main-calendar-th-heading">
-                  TUE <br /><span>25</span>
-                </h3>
-              </th>
-              <th>
-                <h3 class="main-calendar-th-heading">
-                  WED <br /><span>26</span>
-                </h3>
-              </th>
-              <th>
-                <h3 class="main-calendar-th-heading">
-                  THU <br /><span>27</span>
-                </h3>
-              </th>
-              <th>
                 <h3
-                  class="main-calendar-th-heading main-calendar-th-heading-active"
-                >
-                  FRI <br /><span
-                    class="main-calendar-th-heading-number main-calendar-th-heading-number-active"
-                    >28</span
-                  >
-                </h3>
-              </th>
-              <th>
-                <h3 class="main-calendar-th-heading">
-                  SAT <br /><span>29</span>
-                </h3>
-              </th>
-              <th>
-                <h3 class="main-calendar-th-heading">
-                  SUN <br /><span>30</span>
-                </h3>
+                  class="main-calendar-th-heading-first"
+                  id="main-calendar-gmt"
+                ></h3>
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="main-calendar-body">
             <tr>
               <td class="main-calendar-td-first">
                 <p class="main-calendar-td-first-content">01:00</p>
@@ -505,165 +402,7 @@
           </tbody>
         </table>
       </section>
-      <section class="event-modal-overlay">
-        <div class="event-modal">
-          <div class="event-modal-header">
-            <button class="hover-background event-modal-close-btn">
-              <img src="./images/xmark-icon.svg" alt="close modal" />
-            </button>
-          </div>
-          <div class="event-title-container">
-            <input
-              type="text"
-              name="event-title-input"
-              class="event-title-input"
-              placeholder="Add title"
-            />
-          </div>
-          <div class="event-option-container">
-            <label for="event-time-input" class="event-option-label-icon"
-              ><img src="./images/clock-icon.svg" alt="date and time"
-            /></label>
-            <input
-              type="datetime-local"
-              name="event-time-input"
-              id="event-time-input"
-              class="event-fields-formating"
-            />
-          </div>
-          <div class="event-option-container">
-            <label for="event-guest-input" class="event-option-label-icon"
-              ><img src="./images/users-icon.svg" alt="guests"
-            /></label>
-            <input
-              type="text"
-              id="event-guest-input"
-              class="event-fields-formating"
-              placeholder="Add guests"
-            />
-          </div>
-          <div class="event-option-container">
-            <img
-              src="./images/video-icon.svg"
-              alt="video conference"
-              class="event-option-label-icon"
-            />
-            <button
-              class="hover-background event-conference-btn event-fields-formating"
-            >
-              Add video conferencing
-            </button>
-          </div>
-          <div class="event-option-container">
-            <label for="event-room-input" class="event-option-label-icon">
-              <img src="./images/door-icon.svg" alt="meeting room" />
-            </label>
-            <input
-              type="text"
-              id="event-room-input"
-              class="event-fields-formating"
-              placeholder="Add room"
-            />
-          </div>
-          <div class="event-option-container">
-            <label for="event-location-input" class="event-option-label-icon">
-              <img src="./images/location-icon.svg" alt="location" />
-            </label>
-            <input
-              type="text"
-              id="event-location-input"
-              class="event-fields-formating"
-              placeholder="Add location"
-            />
-          </div>
-          <div class="event-option-container">
-            <label
-              for="event-description-input"
-              class="event-option-label-icon"
-            >
-              <img src="./images/message-icon.svg" alt="description" />
-            </label>
-            <input
-              type="text"
-              id="event-description-input"
-              class="event-fields-formating"
-              placeholder="Add description"
-            />
-          </div>
-          <div class="event-option-container">
-            <label for="event-attachment-input" class="event-option-label-icon">
-              <img src="./images/paperclip-icon.svg" alt="file attachment" />
-            </label>
-            <input
-              type="file"
-              id="event-attachment-input"
-              class="event-fields-formating"
-            />
-          </div>
-          <div class="event-option-container">
-            <img
-              src="./images/calendar-icon.svg"
-              alt="host details"
-              class="event-option-label-icon"
-            />
-            <h3 class="event-fields-formating">Kristoferis Solovjov</h3>
-          </div>
-          <div class="event-option-container">
-            <img
-              src="./images/briefcase-icon.svg"
-              alt="event status"
-              class="event-option-label-icon"
-            />
-            <select
-              name="status"
-              class="hover-background event-fields-formating select-chevron-down event-select-formating"
-            >
-              <option value="busy">Busy</option>
-              <option value="free">Free</option>
-            </select>
-          </div>
-          <div class="event-option-container">
-            <img
-              src="./images/lock-icon.svg"
-              alt="event visibility"
-              class="event-option-label-icon"
-            />
-            <select
-              name="visibility"
-              class="hover-background event-fields-formating select-chevron-down event-select-formating"
-            >
-              <option value="default">Default visibility</option>
-              <option value="public">Public</option>
-              <option value="private">Private</option>
-            </select>
-          </div>
-          <div class="event-option-container">
-            <img
-              src="./images/alert-icon.svg"
-              alt="event alert"
-              class="event-option-label-icon"
-            />
-            <select
-              name="alert-time"
-              class="hover-background event-fields-formating select-chevron-down event-select-formating"
-            >
-              <option value="5min">5 minutes before</option>
-              <option value="10min">10 minutes before</option>
-              <option value="15min">15 minutes before</option>
-              <option value="30min">30 minutes before</option>
-              <option value="1hour">1 hour before</option>
-              <option value="1day">1 day before</option>
-              <option value="none">None</option>
-            </select>
-          </div>
-          <div class="event-modal-footer">
-            <button class="hover-background event-modal-more-options-btn">
-              More options
-            </button>
-            <button class="hover-background event-modal-save-btn">Save</button>
-          </div>
-        </div>
-      </section>
     </main>
+    <script src="./index.js" defer type="module"></script>
   </body>
 </html>

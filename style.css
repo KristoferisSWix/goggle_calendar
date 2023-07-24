@@ -62,7 +62,7 @@ img {
   letter-spacing: 0;
   line-height: 28px;
   white-space: nowrap;
-  margin-right: 80px;
+  margin-inline-end: 80px;
 }
 .header-button {
   border: 1px solid lightgray;
@@ -76,7 +76,7 @@ img {
   border-radius: 50%;
 }
 .timeframe-select {
-  padding-right: 35px;
+  padding-inline-end: 35px;
   background-position: right 10px top 9px;
 }
 
@@ -105,7 +105,7 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-block-end: 10px;
   padding-inline: 9px;
 }
 .sidebar-calendar-heading {
@@ -126,6 +126,7 @@ img {
 .sidebar-calendar-table {
   width: 100%;
   text-align: center;
+  table-layout: fixed;
 }
 
 .sidebar-calendar-th {
@@ -162,8 +163,12 @@ img {
 }
 .main-calendar-table {
   width: 100%;
-  padding-top: 20px;
+  padding-block-start: 20px;
   border-collapse: collapse;
+  table-layout: fixed;
+}
+.main-calendar-table tbody {
+  position: relative;
 }
 .main-calendar-thead {
   position: sticky;
@@ -217,6 +222,20 @@ img {
   border: 1px solid lightgray;
   height: 50px;
 }
+.event-container {
+  position: absolute;
+  min-height: 15px;
+  padding-inline: 5px;
+  font-size: 12px;
+  border-radius: 5px;
+  font-weight: 300;
+  color: rgb(0, 110, 255);
+  border: 1px solid rgb(0, 110, 255);
+  background: white;
+  user-select: none;
+  cursor: pointer;
+  overflow: hidden;
+}
 
 /* Event modal */
 .event-modal-overlay {
@@ -260,12 +279,12 @@ img {
   height: 30px;
   padding: 4px 8px 5px;
   border-radius: 50%;
-  margin-right: 20px;
+  margin-inline-end: 20px;
 }
 .event-title-container {
   height: 28px;
-  padding-left: 60px;
-  padding-right: 20px;
+  padding-inline-start: 60px;
+  padding-inline-end: 20px;
 }
 .event-title-input {
   width: 100%;
@@ -309,5 +328,17 @@ img {
 }
 .event-fields-formating {
   font-size: 14px;
+  font-weight: 400;
+}
+.event-modal-info {
+  padding-inline-start: 20px;
+  font-size: 18px;
+  font-weight: 300;
+  text-transform: capitalize;
+}
+.event-modal-info:last-child {
+  margin-block-end: 20px;
+}
+.event-modal-info span {
   font-weight: 400;
 }
