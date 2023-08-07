@@ -1,4 +1,8 @@
 export default class DateProvider {
+  currentYear;
+  currentMonth;
+  currentDay;
+
   constructor() {
     this.currentYear = new Date().getFullYear();
     this.currentMonth = new Date().getMonth();
@@ -6,8 +10,8 @@ export default class DateProvider {
   }
 
   // week getters
-  getWeekDayName(weekDay) {
-    const dayNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+  getWeekDayName(weekDay: number) {
+    const dayNames = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
     return dayNames[weekDay];
   }
@@ -35,16 +39,17 @@ export default class DateProvider {
         viewingDate.getMonth(),
         dateDay
       );
+      const isCurrentCheck =
+        this.currentDay === saveDate.getDate() &&
+        this.currentMonth === saveDate.getMonth() &&
+        this.currentYear === saveDate.getFullYear();
 
       firstWeekInformation.push({
         year: saveDate.getFullYear(),
         month: saveDate.getMonth(),
         day: saveDate.getDate(),
         weekDayName: this.getWeekDayName(saveDate.getDay()),
-        isCurrent:
-          this.currentDay === saveDate.getDate() &&
-          this.currentMonth === saveDate.getMonth() &&
-          this.currentYear === saveDate.getFullYear(),
+        isCurrent: isCurrentCheck,
       });
     }
     return firstWeekInformation;
@@ -53,18 +58,18 @@ export default class DateProvider {
   // month getters
   getMonthName(month = this.currentMonth) {
     const monthNames = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ];
 
     return monthNames[month];
@@ -80,11 +85,11 @@ export default class DateProvider {
 
   // misc
   getOffsetGMT() {
-    function isSingleDigit(n) {
-      return (n < 10 ? "0" : "") + n;
+    function isSingleDigit(n: number) {
+      return (n < 10 ? '0' : '') + n;
     }
     let offset = new Date().getTimezoneOffset();
-    let sign = offset < 0 ? "+" : "-";
+    let sign = offset < 0 ? '+' : '-';
     offset = Math.abs(offset);
     return sign + isSingleDigit((offset / 60) | 0);
   }

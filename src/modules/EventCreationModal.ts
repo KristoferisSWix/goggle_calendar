@@ -1,16 +1,23 @@
+import { UserEvent, formDataValues } from '../types';
+
 // Could be factory relying on abstractions, now duplicate creation/interaction, will implement in react
 export default class EventCreationModal {
-  initialize() {
+  isComplete;
+
+  constructor() {
     this.isComplete = false;
+  }
+
+  initialize() {
     this.displayModal();
     this.bindModalButtons();
   }
 
   // displayers
   displayModal() {
-    const mainContainer = document.querySelector("main");
-    const modalContainer = document.createElement("section");
-    modalContainer.className = "event-modal-overlay";
+    const mainContainer = document.querySelector('main') as HTMLElement;
+    const modalContainer = document.createElement('section') as HTMLElement;
+    modalContainer.className = 'event-modal-overlay';
 
     // template for modal
     modalContainer.innerHTML = `
@@ -111,17 +118,6 @@ export default class EventCreationModal {
            />
          </div>
          <div class="event-option-container">
-           <label for="event-attachment" class="event-option-label-icon">
-             <img src="./images/paperclip-icon.svg" alt="file attachment" />
-           </label>
-           <input
-             type="file"
-             name="event-attachment"
-             id="event-attachment"
-             class="event-fields-formating"
-           />
-         </div>
-         <div class="event-option-container">
            <img
              src="./images/calendar-icon.svg"
              alt="host details"
@@ -192,40 +188,56 @@ export default class EventCreationModal {
 
   // execs
   closeModal() {
-    const modalContainer = document.querySelector(".event-modal-overlay");
+    const modalContainer = document.querySelector(
+      '.event-modal-overlay'
+    ) as HTMLElement;
     modalContainer.remove();
   }
-  saveEvent(formatedForm) {
+
+  saveEvent(formatedForm: UserEvent) {
     const randomIdFn = () =>
-      parseInt(Math.random() * Math.random() * Math.random() * 10 ** 20);
-    const userEventsArray =
-      JSON.parse(localStorage.getItem("userEvents")) || [];
+      parseInt(`${Math.random() * Math.random() * Math.random() * 10 ** 20}`);
+    const userEventsArray = JSON.parse(
+      localStorage.getItem('userEvents') || '[]'
+    );
 
     formatedForm._id = randomIdFn();
 
     // checking for dupes in ids
-    while (userEventsArray.some((ev) => ev._id === formatedForm._id)) {
+    while (
+      userEventsArray.some((ev: UserEvent) => ev._id === formatedForm._id)
+    ) {
       formatedForm._id = randomIdFn();
     }
 
     userEventsArray.push(formatedForm);
-    localStorage.setItem("userEvents", JSON.stringify(userEventsArray));
+    localStorage.setItem('userEvents', JSON.stringify(userEventsArray));
     this.isComplete = true;
   }
 
   // misc
   bindModalButtons() {
-    const closeModalBtn = document.querySelector("#close-modal-btn");
-    const modalContainer = document.querySelector(".event-modal-overlay");
-    const formContainer = document.querySelector("#modal-form");
+    const closeModalBtn = document.querySelector(
+      '#close-modal-btn'
+    ) as HTMLElement;
+    const modalContainer = document.querySelector(
+      '.event-modal-overlay'
+    ) as HTMLElement;
+    const formContainer = document.querySelector(
+      '#modal-form'
+    ) as HTMLFormElement;
 
-    modalContainer.addEventListener("click", (e) => {
-      if (e.target.className === "event-modal-overlay") this.closeModal();
+    modalContainer.addEventListener('click', ({ target }) => {
+      if (
+        target instanceof HTMLElement &&
+        target.className === 'event-modal-overlay'
+      )
+        this.closeModal();
     });
-    closeModalBtn.addEventListener("click", () => {
+    closeModalBtn.addEventListener('click', () => {
       this.closeModal();
     });
-    formContainer.addEventListener("submit", (e) => {
+    formContainer.addEventListener('submit', (e) => {
       e.preventDefault();
 
       const formData = new FormData(formContainer);
@@ -234,43 +246,58 @@ export default class EventCreationModal {
       if (isFieldsValid) this.handleForm(values);
     });
   }
-  fieldValidation(values) {
+  fieldValidation(values: formDataValues) {
     const titleValue = values.filter((field) =>
-      field[0].includes("event-title")
+      field[0].includes('event-title')
     )[0];
     const dateValues = values.filter((field) =>
-      field[0].includes("event-time")
+      field[0].includes('event-time')
     );
-    const eventStartDate = new Date(dateValues[0][1]);
-    const eventEndDate = new Date(dateValues[1][1]);
-    const hasTitle = Boolean(titleValue[1]?.trim().length);
+    const eventStartDate = new Date(`${dateValues[0][1]}`);
+    const eventEndDate = new Date(`${dateValues[1][1]}`);
+    const hasTitle = Boolean(
+      typeof titleValue[1] === 'string' ? titleValue[1]?.trim().length : false
+    );
     const endTimeGreaterThanStart =
       new Date(eventStartDate).getTime() < new Date(eventEndDate).getTime();
+    const isSameDay = eventStartDate.getDate() !== eventEndDate.getDate();
 
     if (!hasTitle) {
-      alert("Please enter a title");
+      alert('Please enter a title');
       return false;
     }
-    if (
-      !endTimeGreaterThanStart ||
-      eventStartDate.getDate() !== eventEndDate.getDate()
-    ) {
-      alert("Please enter valid meeting time");
+    if (!endTimeGreaterThanStart || isSameDay) {
+      alert('Please enter valid meeting time');
       return false;
     }
     return true;
   }
-  handleForm(values) {
+
+  handleForm(values: formDataValues) {
     const formatedForm = this.formateForm(values);
     this.saveEvent(formatedForm);
     this.closeModal();
   }
-  formateForm(doubleArray) {
-    const camelize = (s) => s.replace(/-./g, (x) => x[1].toUpperCase());
-    const formatedObj = {};
+
+  formateForm(doubleArray: formDataValues) {
+    const camelize = (s: string) => s.replace(/-./g, (x) => x[1].toUpperCase());
+    const manipulateObj = <Obj, Key extends keyof Obj>(
+      obj: Obj,
+      key: Key,
+      value: Obj[Key]
+    ) => {
+      obj[key] = value;
+    };
+
+    const formatedObj = {
+      _timesOverlaping: 0,
+    } as UserEvent;
+
     for (let field of doubleArray) {
-      const key = camelize(field[0]);
-      formatedObj[key] = field[1];
+      const key = camelize(field[0]) as keyof UserEvent;
+      if (typeof field[1] === 'string' || typeof field[1] === 'number') {
+        manipulateObj(formatedObj, key, field[1]);
+      }
     }
 
     return formatedObj;

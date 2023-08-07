@@ -1,7 +1,12 @@
-import DateProvider from "./dateProvider.js";
+// @ts-ignore
+import { FullMonthNames } from '../types.js';
+import DateProvider from './dateProvider.js';
 
 export default class SidebarCalendar {
-  constructor(date) {
+  date: DateProvider;
+  monthOffset;
+
+  constructor(date: DateProvider) {
     this.date = date || new DateProvider();
     this.monthOffset = 0;
 
@@ -21,18 +26,21 @@ export default class SidebarCalendar {
   // displayers
   displayHeading() {
     const sidebarCalendarHeading = document.querySelector(
-      "#sidebar-calendar-date"
-    );
+      '#sidebar-calendar-date'
+    ) as HTMLElement;
     const { year, month } = this.date.parseDateFromMonthOffset(
       this.monthOffset
     );
+    const monthName = this.date.getMonthName(month);
+    const fullMonthName =
+      FullMonthNames[monthName as keyof typeof FullMonthNames];
 
-    sidebarCalendarHeading.innerText = `${this.date.getMonthName(
-      month
-    )} ${year}`;
+    sidebarCalendarHeading.innerText = `${fullMonthName} ${year}`;
   }
   displayBody() {
-    const sidebarCalendarBody = document.querySelector("#sidebar-calendar");
+    const sidebarCalendarBody = document.querySelector(
+      '#sidebar-calendar'
+    ) as HTMLElement;
     const { currentMonthLength, prevMonthLength } =
       this.date.getPrevAndCurrMonthLength(this.monthOffset);
 
@@ -41,7 +49,7 @@ export default class SidebarCalendar {
     );
     const firstWeekLength = 7 - this.date.getWeekDay(1, displayMonthNumber);
 
-    sidebarCalendarBody.innerHTML = "";
+    sidebarCalendarBody.innerHTML = '';
 
     const monthCells = [];
     for (let k = 1; k <= currentMonthLength; k++) {
@@ -64,14 +72,14 @@ export default class SidebarCalendar {
 
   // creators
   createRowSideCalendar(
-    rowElements,
+    rowElements: HTMLElement[],
     isFirstRow = false,
-    prevMonthLength,
-    displayMonthNumber
+    prevMonthLength?: number,
+    displayMonthNumber?: number
   ) {
-    const tRow = document.createElement("tr");
+    const tRow = document.createElement('tr');
 
-    if (isFirstRow) {
+    if (isFirstRow && prevMonthLength) {
       const prevMonthFirstDisplayDate =
         prevMonthLength - this.date.getWeekDay(1, displayMonthNumber) + 1;
 
@@ -89,20 +97,20 @@ export default class SidebarCalendar {
     }
     return tRow;
   }
-  createCell(text, notCurrMonth = false) {
-    const cell = document.createElement("td");
+  createCell(dayNumber: number, notCurrMonth = false) {
+    const cell = document.createElement('td');
 
     if (notCurrMonth) {
-      cell.className = "sidebar-calendar-td sidebar-calendar-td-not-current";
+      cell.className = 'sidebar-calendar-td sidebar-calendar-td-not-current';
     }
     if (!notCurrMonth) {
       cell.className =
-        this.date.currentDay === text && !this.monthOffset
-          ? "sidebar-calendar-td sidebar-calendar-td-active"
-          : "sidebar-calendar-td";
+        this.date.currentDay === dayNumber && !this.monthOffset
+          ? 'sidebar-calendar-td sidebar-calendar-td-active'
+          : 'sidebar-calendar-td';
     }
 
-    cell.innerText = text;
+    cell.innerText = `${dayNumber}`;
 
     return cell;
   }
@@ -110,17 +118,17 @@ export default class SidebarCalendar {
   // misc
   bindSidebarCalendarControls() {
     const nextPeriodBtn = document.querySelector(
-      "#sidebar-calendar-next-period"
-    );
+      '#sidebar-calendar-next-period'
+    ) as HTMLElement;
     const prevPeriodBtn = document.querySelector(
-      "#sidebar-calendar-previous-period"
-    );
+      '#sidebar-calendar-previous-period'
+    ) as HTMLElement;
 
-    nextPeriodBtn.addEventListener("click", () => {
+    nextPeriodBtn.addEventListener('click', () => {
       this.monthOffset++;
       this.render();
     });
-    prevPeriodBtn.addEventListener("click", () => {
+    prevPeriodBtn.addEventListener('click', () => {
       this.monthOffset--;
       this.render();
     });
