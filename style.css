@@ -163,6 +163,7 @@ img {
 }
 .main-calendar-table {
   width: 100%;
+  min-width: 800px;
   padding-block-start: 20px;
   border-collapse: collapse;
   table-layout: fixed;
