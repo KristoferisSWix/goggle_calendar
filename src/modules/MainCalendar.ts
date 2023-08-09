@@ -1,4 +1,5 @@
 import { UserEvent, weekDay, isTodayType } from '../types.js';
+import fetchUtil from '../utils/fetchUtil.js';
 import EventInteractionModal from './EventInteractionModal.js';
 
 export default class MainCalendar {
@@ -9,14 +10,15 @@ export default class MainCalendar {
   constructor(gmt: string, week: weekDay[]) {
     this.gmtOffset = gmt;
     this.weekInfo = week;
-    this.userEvents = JSON.parse(localStorage.getItem('userEvents') || '[]');
+    this.userEvents = [];
     this.displayWeek();
   }
 
   // displayers
-  displayWeek() {
-    this.removeNotRelevantEvents();
+  async displayWeek() {
+    this.userEvents = await this.getEvents();
 
+    this.removeNotRelevantEvents();
     const relevantEvents = this.filterEvents();
     relevantEvents.forEach((ev) => this.displayEvent(ev));
 
@@ -70,23 +72,22 @@ export default class MainCalendar {
     displayContainer.style.cssText = `top:${calculatedTopOffset}px;left:${calculatedLeftOffset}px;width:${displayWidth}px;height:${calculatedHeight}px`;
     displayContainer.className = 'event-container';
     displayContainer.innerHTML = `${eventTitle}`;
-    displayContainer.setAttribute('data-event', JSON.stringify(data));
+    displayContainer.setAttribute('data-event', JSON.stringify(data.id));
 
     displayContainer.addEventListener('click', ({ target }) => {
       if (!target || !(target instanceof HTMLElement)) return;
-
       const eventData = JSON.parse(target.dataset.event || '');
 
-      // could pass data directly, just wanted to use dataset
-      new EventInteractionModal(eventData);
+      const interactionModal = new EventInteractionModal(eventData);
 
       const removeModalBtn = document.querySelector(
         '#remove-modal-btn'
       ) as HTMLElement;
-      removeModalBtn.addEventListener('click', () => {
-        this.userEvents = JSON.parse(
-          localStorage.getItem('userEvents') || '[]'
-        );
+
+      removeModalBtn.addEventListener('click', async () => {
+        await interactionModal.removeEvent();
+        interactionModal.closeModal();
+
         this.displayWeek();
       });
     });
@@ -101,12 +102,16 @@ export default class MainCalendar {
   }
 
   //  misc
+  async getEvents() {
+    const resp = (await fetchUtil()) as UserEvent[];
+    return resp || [];
+  }
   filterEvents() {
     const displayedWeekInfo = this.weekInfo;
     const relevantEvents = this.userEvents.filter((userEvent, i) => {
       const timesOverlaping = this.checkIfInInterval(
         new Date(userEvent.eventTimeStart).getTime(),
-        userEvent._id
+        userEvent.id
       );
 
       this.userEvents[i]._timesOverlaping = timesOverlaping;
@@ -120,6 +125,14 @@ export default class MainCalendar {
           year == eventYear && month == eventMonth && day == eventDay
       );
     });
+
+    relevantEvents.sort((a, b) =>
+      new Date(a.eventTimeStart).getTime() >
+      new Date(b.eventTimeStart).getTime()
+        ? 1
+        : -1
+    );
+    // kaip faina butu buve laika inicializuot kaip ms, o ne timestamp
     return relevantEvents;
   }
   checkIfInInterval(startTime: number, id: number) {
@@ -127,7 +140,7 @@ export default class MainCalendar {
       const eventStartTime = new Date(curr.eventTimeStart).getTime();
       const eventEndTime = new Date(curr.eventTimeEnd).getTime();
       if (
-        curr._id !== id &&
+        curr.id !== id &&
         eventEndTime >= startTime &&
         eventStartTime <= startTime
       ) {

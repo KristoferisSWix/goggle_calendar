@@ -51,11 +51,10 @@ export default class DateProvider {
         ];
         return monthNames[month];
     }
-    getPrevAndCurrMonthLength(providedMonthOffset = 0) {
+    getMonthLength(providedMonthOffset = 0) {
         const { year, month } = this.parseDateFromMonthOffset(providedMonthOffset);
-        const currentMonthLength = new Date(year, month + 1, 0).getDate();
-        const prevMonthLength = new Date(year, month, 0).getDate();
-        return { currentMonthLength, prevMonthLength };
+        const monthLength = new Date(year, month + 1, 0).getDate();
+        return monthLength;
     }
     // misc
     getOffsetGMT() {
@@ -65,7 +64,7 @@ export default class DateProvider {
         let offset = new Date().getTimezoneOffset();
         let sign = offset < 0 ? '+' : '-';
         offset = Math.abs(offset);
-        return sign + isSingleDigit((offset / 60) | 0);
+        return sign + isSingleDigit(offset / 60 || 0);
     }
     parseDateFromMonthOffset(monthOffset = 0) {
         let correctedMonthOffset = this.currentMonth + monthOffset;

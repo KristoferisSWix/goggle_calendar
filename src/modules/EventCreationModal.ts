@@ -1,4 +1,5 @@
 import { UserEvent, formDataValues } from '../types';
+import fetchUtil from '../utils/fetchUtil.js';
 
 // Could be factory relying on abstractions, now duplicate creation/interaction, will implement in react
 export default class EventCreationModal {
@@ -194,24 +195,9 @@ export default class EventCreationModal {
     modalContainer.remove();
   }
 
-  saveEvent(formatedForm: UserEvent) {
-    const randomIdFn = () =>
-      parseInt(`${Math.random() * Math.random() * Math.random() * 10 ** 20}`);
-    const userEventsArray = JSON.parse(
-      localStorage.getItem('userEvents') || '[]'
-    );
+  async saveEvent(userEv: UserEvent) {
+    fetchUtil('POST', userEv);
 
-    formatedForm._id = randomIdFn();
-
-    // checking for dupes in ids
-    while (
-      userEventsArray.some((ev: UserEvent) => ev._id === formatedForm._id)
-    ) {
-      formatedForm._id = randomIdFn();
-    }
-
-    userEventsArray.push(formatedForm);
-    localStorage.setItem('userEvents', JSON.stringify(userEventsArray));
     this.isComplete = true;
   }
 
@@ -301,5 +287,9 @@ export default class EventCreationModal {
     }
 
     return formatedObj;
+  }
+  async getEvents() {
+    const resp = await fetchUtil();
+    return resp || [];
   }
 }

@@ -1,3 +1,13 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+import fetchUtil from '../utils/fetchUtil.js';
 // Could be factory relying on abstractions, now duplicate creation/interaction, will implement in react
 export default class EventCreationModal {
     constructor() {
@@ -182,17 +192,11 @@ export default class EventCreationModal {
         const modalContainer = document.querySelector('.event-modal-overlay');
         modalContainer.remove();
     }
-    saveEvent(formatedForm) {
-        const randomIdFn = () => parseInt(`${Math.random() * Math.random() * Math.random() * Math.pow(10, 20)}`);
-        const userEventsArray = JSON.parse(localStorage.getItem('userEvents') || '[]');
-        formatedForm._id = randomIdFn();
-        // checking for dupes in ids
-        while (userEventsArray.some((ev) => ev._id === formatedForm._id)) {
-            formatedForm._id = randomIdFn();
-        }
-        userEventsArray.push(formatedForm);
-        localStorage.setItem('userEvents', JSON.stringify(userEventsArray));
-        this.isComplete = true;
+    saveEvent(userEv) {
+        return __awaiter(this, void 0, void 0, function* () {
+            fetchUtil('POST', userEv);
+            this.isComplete = true;
+        });
     }
     // misc
     bindModalButtons() {
@@ -255,5 +259,11 @@ export default class EventCreationModal {
             }
         }
         return formatedObj;
+    }
+    getEvents() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const resp = yield fetchUtil();
+            return resp || [];
+        });
     }
 }

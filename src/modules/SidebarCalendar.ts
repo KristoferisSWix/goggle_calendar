@@ -41,13 +41,13 @@ export default class SidebarCalendar {
     const sidebarCalendarBody = document.querySelector(
       '#sidebar-calendar'
     ) as HTMLElement;
-    const { currentMonthLength, prevMonthLength } =
-      this.date.getPrevAndCurrMonthLength(this.monthOffset);
+    const currentMonthLength = this.date.getMonthLength(this.monthOffset);
+    const prevMonthLength = this.date.getMonthLength(this.monthOffset - 1);
 
-    const { month: displayMonthNumber } = this.date.parseDateFromMonthOffset(
-      this.monthOffset
-    );
-    const firstWeekLength = 7 - this.date.getWeekDay(1, displayMonthNumber);
+    const { year: displayYear, month: displayMonth } =
+      this.date.parseDateFromMonthOffset(this.monthOffset);
+    const firstWeekLength =
+      7 - this.date.getWeekDay(1, displayMonth, displayYear);
 
     sidebarCalendarBody.innerHTML = '';
 
@@ -60,7 +60,8 @@ export default class SidebarCalendar {
       monthCells.splice(0, firstWeekLength),
       true,
       prevMonthLength,
-      displayMonthNumber
+      displayMonth,
+      displayYear
     );
     sidebarCalendarBody.append(firstRow);
 
@@ -75,13 +76,16 @@ export default class SidebarCalendar {
     rowElements: HTMLElement[],
     isFirstRow = false,
     prevMonthLength?: number,
-    displayMonthNumber?: number
+    displayMonth?: number,
+    displayYear?: number
   ) {
     const tRow = document.createElement('tr');
 
     if (isFirstRow && prevMonthLength) {
       const prevMonthFirstDisplayDate =
-        prevMonthLength - this.date.getWeekDay(1, displayMonthNumber) + 1;
+        prevMonthLength -
+        this.date.getWeekDay(1, displayMonth, displayYear) +
+        1;
 
       for (let j = prevMonthFirstDisplayDate; j <= prevMonthLength; j++) {
         tRow.append(this.createCell(j, true));

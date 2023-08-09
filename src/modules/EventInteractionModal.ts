@@ -1,12 +1,12 @@
 import { DisplayUserEvent, UserEvent } from '../types';
+import fetchUtil from '../utils/fetchUtil.js';
 
 export default class EventInteractionModal {
-  displayData;
+  displayID;
 
-  constructor(displayData: UserEvent) {
-    this.displayData = displayData;
+  constructor(displayID: string) {
+    this.displayID = displayID;
     this.displayModal();
-    this.bindModalButtons();
   }
 
   // execs
@@ -18,47 +18,72 @@ export default class EventInteractionModal {
   }
 
   // displayers
-  displayModal() {
+  async displayModal() {
     const mainContainer = document.querySelector('main') as HTMLElement;
     const modalOverlay = document.createElement('section');
     const modalContent = document.createElement('div');
     modalContent.className = 'event-modal';
     modalOverlay.className = 'event-modal-overlay';
-    const modalHeader = `<div class="event-modal-header">
-<button class="hover-background event-modal-close-btn" id="remove-modal-btn">
-  <img src="./images/trash-can-icon.svg" alt="delete event" />
-</button>
-<button class="hover-background event-modal-close-btn" id="close-modal-btn">
-  <img src="./images/xmark-icon.svg" alt="close modal" />
-</button>
-</div>`;
-    const parsedData = this.parseData(this.displayData);
-    const modalData = [];
-    for (let field in parsedData) {
-      if (parsedData[field as keyof DisplayUserEvent] && !field.includes('_'))
-        modalData.push(
-          `<p class="event-modal-info"><span>${field}:</span> ${
-            parsedData[field as keyof DisplayUserEvent]
-          }</p>`
-        );
-    }
+    const modalHeader = this.createHeader();
 
-    modalContent.innerHTML = `
-    ${modalHeader}
-    ${modalData.join(' ')}
-`;
+    modalContent.append(modalHeader);
     modalOverlay.append(modalContent);
     mainContainer.append(modalOverlay);
+
+    const modalData = await this.displayModalContent();
+    modalContent.append(...modalData);
+
+    this.bindModalButtons();
+  }
+  createHeader() {
+    const container = document.createElement('div');
+    container.className = 'event-modal-header';
+    const deleteIcon = document.createElement('button');
+    deleteIcon.className = 'hover-background event-modal-close-btn';
+    deleteIcon.id = 'remove-modal-btn';
+    deleteIcon.innerHTML = `
+  <img src="./images/trash-can-icon.svg" alt="delete event" />
+  `;
+    const closeIcon = document.createElement('button');
+    closeIcon.className = 'hover-background event-modal-close-btn';
+    closeIcon.id = 'close-modal-btn';
+    closeIcon.innerHTML = `
+  <img src="./images/xmark-icon.svg" alt="close modal" />
+  `;
+    container.append(deleteIcon, closeIcon);
+    return container;
+  }
+  async displayModalContent() {
+    const eventData = await this.getEvent();
+    const parsedEventData = this.parseData(eventData);
+    const modalData = [];
+    for (let field in parsedEventData) {
+      if (
+        parsedEventData[field as keyof DisplayUserEvent] &&
+        !field.includes('_')
+      ) {
+        const container = document.createElement('p');
+        container.className = 'event-modal-info';
+        container.innerHTML = `<span>${field}:</span> ${
+          parsedEventData[field as keyof DisplayUserEvent]
+        }`;
+        modalData.push(container);
+      }
+    }
+    return modalData;
   }
 
   // misc
-  removeEvent() {
-    const userEvents = JSON.parse(localStorage.getItem('userEvents') || '[]');
-
-    const filteredEvents = userEvents.filter(
-      (ev: UserEvent) => ev._id !== this.displayData._id
-    );
-    localStorage.setItem('userEvents', JSON.stringify(filteredEvents));
+  async removeEvent() {
+    fetchUtil('DELETE', undefined, this.displayID);
+  }
+  async getEvent() {
+    const resp = (await fetchUtil(
+      'GET',
+      undefined,
+      this.displayID
+    )) as UserEvent;
+    return resp || [];
   }
   parseData(data: UserEvent) {
     const unCamelize = (s: string) =>
@@ -75,14 +100,10 @@ export default class EventInteractionModal {
       const key = unCamelize(field) as keyof DisplayUserEvent;
       manipulateObj(formatedObj, key, data[field as keyof UserEvent]);
     }
-    console.log(formatedObj);
     return formatedObj;
   }
 
   bindModalButtons() {
-    const removeModalBtn = document.querySelector(
-      '#remove-modal-btn'
-    ) as HTMLElement;
     const closeModalBtn = document.querySelector(
       '#close-modal-btn'
     ) as HTMLElement;
@@ -90,10 +111,6 @@ export default class EventInteractionModal {
       '.event-modal-overlay'
     ) as HTMLElement;
 
-    removeModalBtn.addEventListener('click', () => {
-      this.closeModal();
-      this.removeEvent();
-    });
     modalContainer.addEventListener('click', ({ target }) => {
       if (
         target instanceof HTMLElement &&

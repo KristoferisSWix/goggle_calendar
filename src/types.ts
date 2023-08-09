@@ -10,7 +10,7 @@ export interface UserEvent {
   eventVisibility: string;
   eventAlert: string;
   _timesOverlaping: number;
-  _id: number;
+  id: number;
 }
 
 export interface DisplayUserEvent {

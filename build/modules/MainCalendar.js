@@ -1,18 +1,31 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+import fetchUtil from '../utils/fetchUtil.js';
 import EventInteractionModal from './EventInteractionModal.js';
 export default class MainCalendar {
     constructor(gmt, week) {
         this.gmtOffset = gmt;
         this.weekInfo = week;
-        this.userEvents = JSON.parse(localStorage.getItem('userEvents') || '[]');
+        this.userEvents = [];
         this.displayWeek();
     }
     // displayers
     displayWeek() {
-        this.removeNotRelevantEvents();
-        const relevantEvents = this.filterEvents();
-        relevantEvents.forEach((ev) => this.displayEvent(ev));
-        this.displayWeekHead();
-        this.displayGMT();
+        return __awaiter(this, void 0, void 0, function* () {
+            this.userEvents = yield this.getEvents();
+            this.removeNotRelevantEvents();
+            const relevantEvents = this.filterEvents();
+            relevantEvents.forEach((ev) => this.displayEvent(ev));
+            this.displayWeekHead();
+            this.displayGMT();
+        });
     }
     displayWeekHead() {
         const weekInformation = this.weekInfo;
@@ -46,18 +59,18 @@ export default class MainCalendar {
         displayContainer.style.cssText = `top:${calculatedTopOffset}px;left:${calculatedLeftOffset}px;width:${displayWidth}px;height:${calculatedHeight}px`;
         displayContainer.className = 'event-container';
         displayContainer.innerHTML = `${eventTitle}`;
-        displayContainer.setAttribute('data-event', JSON.stringify(data));
+        displayContainer.setAttribute('data-event', JSON.stringify(data.id));
         displayContainer.addEventListener('click', ({ target }) => {
             if (!target || !(target instanceof HTMLElement))
                 return;
             const eventData = JSON.parse(target.dataset.event || '');
-            // could pass data directly, just wanted to use dataset
-            new EventInteractionModal(eventData);
+            const interactionModal = new EventInteractionModal(eventData);
             const removeModalBtn = document.querySelector('#remove-modal-btn');
-            removeModalBtn.addEventListener('click', () => {
-                this.userEvents = JSON.parse(localStorage.getItem('userEvents') || '[]');
+            removeModalBtn.addEventListener('click', () => __awaiter(this, void 0, void 0, function* () {
+                yield interactionModal.removeEvent();
+                interactionModal.closeModal();
                 this.displayWeek();
-            });
+            }));
         });
         contentContainer.append(displayContainer);
     }
@@ -66,10 +79,16 @@ export default class MainCalendar {
         headingGMT.innerHTML = `GMT${this.gmtOffset}`;
     }
     //  misc
+    getEvents() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const resp = (yield fetchUtil());
+            return resp || [];
+        });
+    }
     filterEvents() {
         const displayedWeekInfo = this.weekInfo;
         const relevantEvents = this.userEvents.filter((userEvent, i) => {
-            const timesOverlaping = this.checkIfInInterval(new Date(userEvent.eventTimeStart).getTime(), userEvent._id);
+            const timesOverlaping = this.checkIfInInterval(new Date(userEvent.eventTimeStart).getTime(), userEvent.id);
             this.userEvents[i]._timesOverlaping = timesOverlaping;
             const eventDate = new Date(userEvent.eventTimeStart);
             const eventDay = eventDate.getDate();
@@ -77,13 +96,18 @@ export default class MainCalendar {
             const eventYear = eventDate.getFullYear();
             return displayedWeekInfo.some(({ year, month, day }) => year == eventYear && month == eventMonth && day == eventDay);
         });
+        relevantEvents.sort((a, b) => new Date(a.eventTimeStart).getTime() >
+            new Date(b.eventTimeStart).getTime()
+            ? 1
+            : -1);
+        // kaip faina butu buve laika inicializuot kaip ms, o ne timestamp
         return relevantEvents;
     }
     checkIfInInterval(startTime, id) {
         const timesInInterval = this.userEvents.reduce((acc, curr) => {
             const eventStartTime = new Date(curr.eventTimeStart).getTime();
             const eventEndTime = new Date(curr.eventTimeEnd).getTime();
-            if (curr._id !== id &&
+            if (curr.id !== id &&
                 eventEndTime >= startTime &&
                 eventStartTime <= startTime) {
                 if (curr._timesOverlaping) {

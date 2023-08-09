@@ -26,15 +26,16 @@ export default class SidebarCalendar {
     }
     displayBody() {
         const sidebarCalendarBody = document.querySelector('#sidebar-calendar');
-        const { currentMonthLength, prevMonthLength } = this.date.getPrevAndCurrMonthLength(this.monthOffset);
-        const { month: displayMonthNumber } = this.date.parseDateFromMonthOffset(this.monthOffset);
-        const firstWeekLength = 7 - this.date.getWeekDay(1, displayMonthNumber);
+        const currentMonthLength = this.date.getMonthLength(this.monthOffset);
+        const prevMonthLength = this.date.getMonthLength(this.monthOffset - 1);
+        const { year: displayYear, month: displayMonth } = this.date.parseDateFromMonthOffset(this.monthOffset);
+        const firstWeekLength = 7 - this.date.getWeekDay(1, displayMonth, displayYear);
         sidebarCalendarBody.innerHTML = '';
         const monthCells = [];
         for (let k = 1; k <= currentMonthLength; k++) {
             monthCells.push(this.createCell(k));
         }
-        const firstRow = this.createRowSideCalendar(monthCells.splice(0, firstWeekLength), true, prevMonthLength, displayMonthNumber);
+        const firstRow = this.createRowSideCalendar(monthCells.splice(0, firstWeekLength), true, prevMonthLength, displayMonth, displayYear);
         sidebarCalendarBody.append(firstRow);
         while (monthCells.length) {
             const row = this.createRowSideCalendar(monthCells.splice(0, 7));
@@ -42,10 +43,12 @@ export default class SidebarCalendar {
         }
     }
     // creators
-    createRowSideCalendar(rowElements, isFirstRow = false, prevMonthLength, displayMonthNumber) {
+    createRowSideCalendar(rowElements, isFirstRow = false, prevMonthLength, displayMonth, displayYear) {
         const tRow = document.createElement('tr');
         if (isFirstRow && prevMonthLength) {
-            const prevMonthFirstDisplayDate = prevMonthLength - this.date.getWeekDay(1, displayMonthNumber) + 1;
+            const prevMonthFirstDisplayDate = prevMonthLength -
+                this.date.getWeekDay(1, displayMonth, displayYear) +
+                1;
             for (let j = prevMonthFirstDisplayDate; j <= prevMonthLength; j++) {
                 tRow.append(this.createCell(j, true));
             }
