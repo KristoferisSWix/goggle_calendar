@@ -1,0 +1,30 @@
+.MainCalendarCanvas {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  position: relative;
+}
+.MainCalendarCanvas__cell {
+  border: 1px solid lightgray;
+  height: 50px;
+}
+.MainCalendarCanvas__cell + .MainCalendarCanvas__cell,
+.MainCalendarCanvas__cell:first-child {
+  border-top: none;
+  border-right: none;
+}
+.MainCalendarCanvas__time-container {
+  border-bottom: 1px solid lightgray;
+  text-align: center;
+  height: 50px;
+}
+
+.time-container__content {
+  position: relative;
+  top: -7px;
+  color: gray;
+  font-size: 12px;
+  font-weight: 400;
+  background: white;
+  width: 50px;
+  z-index: 0;
+}

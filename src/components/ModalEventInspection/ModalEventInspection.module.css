@@ -1,0 +1,19 @@
+.event-modal-info {
+  padding-inline-start: 20px;
+  font-size: 18px;
+  font-weight: 300;
+  text-transform: capitalize;
+}
+.event-modal-info:last-child {
+  margin-block-end: 20px;
+}
+.event-modal-info span {
+  font-weight: 400;
+}
+.remove-event {
+  border: 1px solid red;
+  margin: 10px;
+  width: fit-content;
+  padding: 20px;
+  border-radius: 50px;
+}

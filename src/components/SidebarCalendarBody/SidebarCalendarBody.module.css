@@ -1,0 +1,32 @@
+.Sidebar__day-name {
+  color: gray;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 29px;
+}
+.Sibebar__day {
+  font-size: 12px;
+  line-height: 29px;
+  transition: 0.2s ease;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.Sibebar__day:hover {
+  background-color: rgba(211, 211, 211, 0.267);
+}
+.Sibebar__day--active {
+  background: rgb(0, 110, 255);
+  color: white;
+}
+.Sibebar__day--active:hover {
+  background: rgb(0, 51, 255);
+}
+.Sibebar__day--not-current {
+  color: gray;
+}
+.Sidebar__display-container {
+  width: 100%;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
