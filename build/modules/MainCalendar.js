@@ -50,10 +50,9 @@ export default class MainCalendar {
         const numericalDayWeek = eventStartDate.getDay();
         const eventHours = eventStartDate.getHours();
         const eventMinutes = eventStartDate.getMinutes() / 60;
-        const calculatedOneDayWidth = window.innerWidth > 1060 ? (window.innerWidth - 260 - 80) / 7 : 102.78;
+        const calculatedOneDayWidth = (window.innerWidth - 260 - 80) / 7;
         const calculatedHeight = 50 *
             ((eventEndDate.getTime() - eventStartDate.getTime()) / (1000 * 60 * 60));
-        console.log(calculatedOneDayWidth);
         const calculatedLeftOffset = 80 + calculatedOneDayWidth * numericalDayWeek + _timesOverlaping * 20;
         const calculatedTopOffset = 50 * (eventHours + eventMinutes);
         const displayWidth = calculatedOneDayWidth * 0.9 - _timesOverlaping * 20;

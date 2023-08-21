@@ -1,0 +1,11 @@
+/*
+  weird behavior, because of import flow this Input has priority 
+  over imported class where component was invoked, should 
+  just have text-size: sm | md| lg| xl  
+  */
+input {
+  font-size: 14px;
+}
+.Input {
+  font-weight: 400;
+}

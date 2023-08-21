@@ -1,0 +1,22 @@
+.Sidebar__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-block-end: 10px;
+  padding-inline: 9px;
+}
+.Sidebar__heading {
+  font-size: 14px;
+  font-weight: 400;
+}
+.Sidebar__controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.Sibedar__timeframe-button {
+  width: 20px;
+  height: 20px;
+  padding: 3.5px 6px;
+  border-radius: 50%;
+}

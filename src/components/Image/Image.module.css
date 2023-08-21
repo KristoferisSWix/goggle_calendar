@@ -1,0 +1,10 @@
+.Image {
+  object-fit: contain;
+  object-position: center;
+}
+.icon {
+  width: 20px;
+}
+.auto {
+  width: auto;
+}

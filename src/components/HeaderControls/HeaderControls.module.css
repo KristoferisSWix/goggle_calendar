@@ -1,0 +1,30 @@
+.HeaderControls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.HeaderControls__hamburger-menu {
+  height: 48px;
+  width: 48px;
+  padding: 12.5px 14px;
+  border-radius: 50%;
+}
+.HeaderControls__heading {
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 28px;
+  white-space: nowrap;
+  margin-inline-end: 80px;
+}
+.HeaderControls__button {
+  border: 1px solid lightgray;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+.HeaderControls__offset-control {
+  height: 32px;
+  width: 32px;
+  padding: 7px 11px;
+  border-radius: 50%;
+}
