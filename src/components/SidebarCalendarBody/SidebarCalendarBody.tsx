@@ -1,9 +1,9 @@
-import styles from "./SidebarCalendarBody.module.css";
-import cx from "classnames";
-import { dayParams } from "../../types";
-import Button from "../Button/Button";
-import { useContext } from "react";
-import DateContext from "../../context/DateContext";
+import styles from './SidebarCalendarBody.module.scss';
+import cx from 'classnames';
+import { dayParams } from '../../types';
+import Button from '../Button/Button';
+import { useContext } from 'react';
+import DateContext from '../../context/DateContext';
 interface ISidebarCalendarBody {
   monthOffset: number;
 }
@@ -15,13 +15,10 @@ const SidebarCalendarBody = ({ monthOffset }: ISidebarCalendarBody) => {
     .map(({ weekDayName }) => weekDayName);
 
   return (
-    <section className={styles["Sidebar__display-container"]}>
+    <section className={styles.container}>
       {weekDayNames.map((dayName) => {
         return (
-          <h5
-            key={`sidebar-${dayName}`}
-            className={styles["Sidebar__day-name"]}
-          >
+          <h5 key={`sidebar-${dayName}`} className={styles.notCurrent}>
             {dayName.slice(0, 1)}
           </h5>
         );
@@ -29,16 +26,21 @@ const SidebarCalendarBody = ({ monthOffset }: ISidebarCalendarBody) => {
       {monthInfo.map(
         ({ year, month, day, isCurrentMonth, isCurrentDay }: dayParams) => {
           return (
-            <Button
-              key={`${year}-${month}-${day}`}
-              className={`${
-                isCurrentMonth
-                  ? styles.Sibebar__day
-                  : cx(styles.Sibebar__day, styles["Sibebar__day--not-current"])
-              } ${isCurrentDay ? styles["Sibebar__day--active"] : ""}`}
-            >
-              {day}
-            </Button>
+            <div key={`${year}-${month}-${day}`} className={styles.box}>
+              <Button
+                size="small"
+                theme={isCurrentMonth && isCurrentDay ? 'active' : undefined}
+              >
+                <span
+                  className={cx(
+                    isCurrentMonth ? styles.current : styles.notCurrent,
+                    isCurrentDay && isCurrentMonth ? styles.today : ''
+                  )}
+                >
+                  {day}
+                </span>
+              </Button>
+            </div>
           );
         }
       )}

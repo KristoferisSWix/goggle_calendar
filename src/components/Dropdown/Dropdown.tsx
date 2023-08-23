@@ -1,24 +1,20 @@
-import styles from "./Dropdown.module.css";
-import cx from "classnames";
+import styles from './Dropdown.module.scss';
+import cx from 'classnames';
 
 interface IDropdown {
-  className?: string;
   name?: string;
   id: string;
   optionArr: { value: string; text: string }[];
   defaultValue?: string;
+  skin?: 'standard';
 }
 
-const Dropdown = ({
-  className = "",
-  name,
-  id,
-  optionArr,
-  defaultValue,
-}: IDropdown) => {
+const Dropdown = ({ name, id, optionArr, defaultValue, skin }: IDropdown) => {
   return (
     <select
-      className={cx(styles.Dropdown, className)}
+      className={cx(styles.dropdown, {
+        [styles.standard]: skin === 'standard',
+      })}
       name={name || id}
       id={id}
       defaultValue={defaultValue}

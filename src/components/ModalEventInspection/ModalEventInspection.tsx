@@ -1,9 +1,9 @@
-import { EVENTS_URL } from "../../constants";
-import { UserEvent } from "../../types";
-import styles from "./ModalEventInspection.module.css";
-import { useContext, useEffect, useState } from "react";
-import Button from "../Button/Button";
-import UserEventsContext from "../../context/UserEventsContext";
+import { EVENTS_URL } from '../../constants';
+import { UserEvent } from '../../types';
+import styles from './ModalEventInspection.module.scss';
+import { useContext, useEffect, useState } from 'react';
+import Button from '../Button/Button';
+import UserEventsContext from '../../context/UserEventsContext';
 
 interface IModalEventCreation {
   closeModal: () => void;
@@ -16,9 +16,9 @@ const ModalEventInspection = ({ closeModal, id }: IModalEventCreation) => {
 
   const handleClick = () => {
     (async () => {
-      await fetch(EVENTS_URL + "/" + id.toString(), {
-        method: "DELETE",
-      }).catch(() => console.log("didnt delte"));
+      await fetch(EVENTS_URL + '/' + id.toString(), {
+        method: 'DELETE',
+      }).catch(() => console.log('didnt delte'));
       setUserEvents([]);
     })().catch((e) => console.log(e));
 
@@ -27,7 +27,7 @@ const ModalEventInspection = ({ closeModal, id }: IModalEventCreation) => {
 
   useEffect(() => {
     const fetchEvent = async () => {
-      const res = await fetch(EVENTS_URL + "/" + id.toString());
+      const res = await fetch(EVENTS_URL + '/' + id.toString());
       const parsed = (await res.json()) as UserEvent;
       setData(parsed);
     };
@@ -44,12 +44,12 @@ const ModalEventInspection = ({ closeModal, id }: IModalEventCreation) => {
     for (const el in data) {
       if (
         !data[el as keyof UserEvent] ||
-        typeof data[el as keyof UserEvent] === "number"
+        typeof data[el as keyof UserEvent] === 'number'
       ) {
         continue;
       }
       display.push(
-        <p key={el} className={styles["event-modal-info"]}>
+        <p key={el} className={styles.info}>
           <span> {el}:</span> {data[el as keyof UserEvent]}
         </p>
       );
@@ -57,7 +57,7 @@ const ModalEventInspection = ({ closeModal, id }: IModalEventCreation) => {
     return (
       <>
         {display}
-        <Button className={styles["remove-event"]} onClick={handleClick}>
+        <Button skin="destructive" size="large" onClick={handleClick}>
           Remove Event
         </Button>
       </>

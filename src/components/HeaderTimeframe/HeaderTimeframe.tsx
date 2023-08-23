@@ -1,36 +1,35 @@
-import Dropdown from "../Dropdown/Dropdown";
-import styles from "./HeaderTimeframe.module.css";
+import Dropdown from '../Dropdown/Dropdown';
 
 const HeaderTimeframe = () => {
   return (
     <Dropdown
-      className={styles.HeaderTimeframe}
+      skin="standard"
       id="timeframe"
       defaultValue="week"
       optionArr={[
         {
-          value: "day",
-          text: "Day",
+          value: 'day',
+          text: 'Day',
         },
         {
-          value: "week",
-          text: "Week",
+          value: 'week',
+          text: 'Week',
         },
         {
-          value: "month",
-          text: "Month",
+          value: 'month',
+          text: 'Month',
         },
         {
-          value: "year",
-          text: "Year",
+          value: 'year',
+          text: 'Year',
         },
         {
-          value: "schedule",
-          text: "Schedule",
+          value: 'schedule',
+          text: 'Schedule',
         },
         {
-          value: "4-days",
-          text: "4 days",
+          value: '4-days',
+          text: '4 days',
         },
       ]}
     />

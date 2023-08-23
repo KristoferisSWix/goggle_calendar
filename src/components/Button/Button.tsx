@@ -1,32 +1,43 @@
-import { CSSProperties, MouseEventHandler, ReactNode } from "react";
-import styles from "./Button.module.css";
-import cx from "classnames";
+import { CSSProperties, MouseEventHandler, ReactNode } from 'react';
+import styles from './Button.module.scss';
+import cx from 'classnames';
 
 interface IButton {
   children: ReactNode;
-  className?: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   id?: string;
   style?: CSSProperties;
-  type?: "button" | "reset" | "submit" | undefined;
+  size?: 'small' | 'medium' | 'large';
+  skin?: 'standard' | 'simple' | 'destructive' | 'none';
+  theme?: 'active' | undefined;
+  type?: 'button' | 'reset' | 'submit' | undefined;
 }
 
 const Button = ({
   children,
   onClick,
-  className = "",
   id,
   type,
   style,
+  size = 'medium',
+  theme,
+  skin = 'none',
 }: IButton) => {
-  const compiledClassName = cx(styles.Button, className);
-
   return (
     <button
       style={style}
       type={type}
       onClick={onClick}
-      className={compiledClassName}
+      className={cx(styles.button, {
+        [styles.active]: theme === 'active',
+        [styles.none]: skin === 'none',
+        [styles.standard]: skin === 'standard',
+        [styles.simple]: skin === 'simple',
+        [styles.destructive]: skin === 'destructive',
+        [styles.small]: size === 'small',
+        [styles.medium]: size === 'medium',
+        [styles.large]: size === 'large',
+      })}
       id={id}
     >
       {children}

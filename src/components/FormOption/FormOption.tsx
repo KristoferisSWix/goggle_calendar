@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import styles from "./FormOption.module.css";
+import { ReactNode } from 'react';
+import styles from './FormOption.module.scss';
 
 interface IFormOption {
   children: ReactNode;
@@ -11,18 +11,13 @@ interface IFormOption {
 
 const FormOption = ({
   children,
-  containerClassName = styles.FormOption,
-  labelClassName = styles["FormOption--icon"],
+  containerClassName = styles.formOption,
   labelChildren,
   id,
 }: IFormOption) => {
   return (
     <div className={containerClassName}>
-      {labelChildren && (
-        <label htmlFor={id} className={labelClassName}>
-          {labelChildren}
-        </label>
-      )}
+      {labelChildren && <label htmlFor={id}>{labelChildren}</label>}
       {children}
     </div>
   );

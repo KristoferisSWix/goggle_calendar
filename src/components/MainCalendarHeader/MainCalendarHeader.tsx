@@ -1,33 +1,30 @@
-import { useContext } from "react";
-import styles from "./MainCalendarHeader.module.css";
-import cx from "classnames";
-import DateContext from "../../context/DateContext";
+import { useContext } from 'react';
+import styles from './MainCalendarHeader.module.scss';
+import cx from 'classnames';
+import DateContext from '../../context/DateContext';
 
 const MainCalendarHeader = () => {
   const [date] = useContext(DateContext);
   const weekInfo = date.getWeekInfo();
 
   return (
-    <section className={styles.MainCalendarHeader}>
+    <section className={styles.mainCalendarHeader}>
       {weekInfo.map((day) => {
         return (
           <h3
             key={`main-${day.weekDayName}`}
             className={
               day.isCurrentDay
-                ? cx(
-                    styles.MainCalendarHeader__heading,
-                    styles["MainCalendarHeader__heading--active"]
-                  )
-                : styles.MainCalendarHeader__heading
+                ? cx(styles.heading, styles.headingActive)
+                : styles.heading
             }
           >
             {day.weekDayName} <br />
             <span
               className={
                 day.isCurrentDay
-                  ? styles["MainCalendarHeader__heading-number--active"]
-                  : styles["MainCalendarHeader__heading-number"]
+                  ? styles.headingNumberActive
+                  : styles.headingNumber
               }
             >
               {day.day}
@@ -35,7 +32,7 @@ const MainCalendarHeader = () => {
           </h3>
         );
       })}
-      <h3 className={styles.MainCalendarHeader__GMT} id="main-calendar-gmt">
+      <h3 className={styles.GMT} id="main-calendar-gmt">
         GMT{date.getOffsetGMT()}
       </h3>
     </section>

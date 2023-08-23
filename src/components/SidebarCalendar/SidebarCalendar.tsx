@@ -1,29 +1,26 @@
-import { useContext, useEffect, useState } from "react";
-import Button from "../Button/Button";
-import SidebarCalendarBody from "../SidebarCalendarBody/SidebarCalendarBody";
-import SidebarCalendarHeader from "../SidebarCalendarHeader/SidebarCalendarHeader";
-import styles from "./SidebarCalendar.module.css";
-import Modal from "../Modal/Modal";
-import ModalEventCreation from "../ModalEventCreation/ModalEventCreation";
-import DateContext from "../../context/DateContext";
+import { useContext, useEffect, useState } from 'react';
+import Button from '../Button/Button';
+import SidebarCalendarBody from '../SidebarCalendarBody/SidebarCalendarBody';
+import SidebarCalendarHeader from '../SidebarCalendarHeader/SidebarCalendarHeader';
+import styles from './SidebarCalendar.module.scss';
+import Modal from '../Modal/Modal';
+import ModalEventCreation from '../ModalEventCreation/ModalEventCreation';
+import DateContext from '../../context/DateContext';
 
 const SidebarCalendar = () => {
   const [date] = useContext(DateContext);
   const [showModal, setShowModal] = useState(false);
   const monthOffsetState = useState(0);
-  const handleModalClick = () => setShowModal(true);
+  const [, setMonthOffset] = monthOffsetState;
 
+  const handleModalClick = () => setShowModal(true);
   useEffect(() => {
-    const [, setMonthOffset] = monthOffsetState;
     setMonthOffset(0);
-  }, [date, monthOffsetState]);
+  }, [date, setMonthOffset]);
 
   return (
-    <aside className={styles.Sidebar}>
-      <Button
-        onClick={handleModalClick}
-        className={styles["Sidebar__create-event"]}
-      >
+    <aside className={styles.sidebar}>
+      <Button onClick={handleModalClick} skin="simple" size="large">
         Create Event
       </Button>
       {showModal ? (

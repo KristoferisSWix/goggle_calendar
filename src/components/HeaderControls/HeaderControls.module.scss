@@ -1,0 +1,15 @@
+@use '../../style/mixins.module.scss';
+
+.headerControls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.heading {
+  @include mixins.text-preset(22px);
+  letter-spacing: 0;
+  line-height: 28px;
+  white-space: nowrap;
+  margin-inline-end: 60px;
+}

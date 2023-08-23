@@ -1,5 +1,5 @@
 /* Event modal */
-.Modal--overlay {
+.overlay {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -11,7 +11,7 @@
   justify-content: center;
   align-items: center;
 }
-.Modal {
+.modal {
   background: white;
   border-radius: 10px;
   display: grid;
@@ -19,18 +19,16 @@
   overflow: hidden;
   width: 50vw;
 }
+.content {
+  display: grid;
+  gap: 15px;
+  padding: 20px;
+}
 
-.Modal--header {
+.header {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   height: 35px;
   background: rgba(211, 211, 211, 0.246);
-}
-.Modal--close-btn {
-  width: 32px;
-  height: 30px;
-  padding: 4px 8px 5px;
-  border-radius: 50%;
-  margin-inline-end: 20px;
 }

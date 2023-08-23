@@ -1,8 +1,8 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import { EVENTS_URL } from "../constants";
-import { UserEvent } from "../types";
-import DateContext from "../context/DateContext";
-import UserEventsContext from "../context/UserEventsContext";
+import { useContext, useEffect, useRef, useState } from 'react';
+import { EVENTS_URL } from '../constants';
+import { UserEvent } from '../types';
+import DateContext from '../context/DateContext';
+import UserEventsContext from '../context/UserEventsContext';
 
 const useEvents = () => {
   const [date] = useContext(DateContext);
@@ -77,7 +77,6 @@ const useEvents = () => {
         setUserEvents(filteredArr);
       })
       .catch((e) => console.log(e));
-    // }, [JSON.stringify(userEvents), setUserEvents, viewingWeek]);
   }, [useDeepCompareMemoize(userEvents), setUserEvents, viewingWeek]);
 };
 

@@ -1,10 +1,10 @@
-import { useContext } from "react";
-import Button from "../Button/Button";
-import styles from "./HeaderControls.module.css";
-import DateContext from "../../context/DateContext";
-import DateProvider from "../../utils/DateProvider";
-import { FullMonthNames } from "../../types";
-import Image from "../Image/Image";
+import { useContext } from 'react';
+import Button from '../Button/Button';
+import styles from './HeaderControls.module.scss';
+import DateContext from '../../context/DateContext';
+import DateProvider from '../../utils/DateProvider';
+import { FullMonthNames } from '../../types';
+import Image from '../Image/Image';
 
 const HeaderControls = () => {
   const [date, setDate] = useContext(DateContext);
@@ -18,43 +18,38 @@ const HeaderControls = () => {
   const handleClickToday = () => setDate(new DateProvider(0));
 
   return (
-    <div className={styles.HeaderControls}>
-      <Button className={styles["HeaderControls__hamburger-menu"]}>
+    <div className={styles.headerControls}>
+      <Button>
         <Image
           src="./images/hamburger-icon.svg"
           alt="menu button"
-          size="icon"
+          size="iconL"
         />
       </Button>
-      <h2 className={styles["HeaderControls__heading"]}>Calendar</h2>
+      <h2 className={styles.heading}>Calendar</h2>
       <Button
         onClick={handleClickToday}
-        className={styles["HeaderControls__button"]}
         id="show-today-btn"
+        skin="simple"
+        size="medium"
       >
         Today
       </Button>
-      <Button
-        className={styles["HeaderControls__offset-control"]}
-        id="prev-period-btn"
-        onClick={handleClickPrev}
-      >
+      <Button id="prev-period-btn" onClick={handleClickPrev}>
         <Image
+          size="iconM"
           src="./images/chevron-left-icon.svg"
           alt="change timeframe to past"
         />
       </Button>
-      <Button
-        className={styles["HeaderControls__offset-control"]}
-        id="next-period-btn"
-        onClick={handleClickNext}
-      >
+      <Button id="next-period-btn" onClick={handleClickNext}>
         <Image
+          size="iconM"
           src="./images/chevron-right-icon.svg"
           alt="change timeframe to future"
         />
       </Button>
-      <h3 className={styles.HeaderControls__heading} id="header-date">
+      <h3 className={styles.heading} id="header-date">
         {displayMonthName} {displayYear}
       </h3>
     </div>

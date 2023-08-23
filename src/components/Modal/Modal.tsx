@@ -1,8 +1,8 @@
-import { MutableRefObject, ReactNode, useEffect, useRef } from "react";
-import { createPortal } from "react-dom";
-import styles from "./Modal.module.css";
-import Button from "../Button/Button";
-import Image from "../Image/Image";
+import { MutableRefObject, ReactNode, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
+import styles from './Modal.module.scss';
+import Button from '../Button/Button';
+import Image from '../Image/Image';
 interface IModal {
   children: ReactNode;
   closeModal: () => void;
@@ -10,11 +10,11 @@ interface IModal {
 const Modal = ({ children, closeModal }: IModal) => {
   const elRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
   if (!elRef.current) {
-    elRef.current = document.createElement("div");
+    elRef.current = document.createElement('div');
   }
 
   useEffect(() => {
-    const modalRoot = document.getElementById("modal");
+    const modalRoot = document.getElementById('modal');
     if (!modalRoot || !elRef.current) {
       return;
     }
@@ -27,18 +27,18 @@ const Modal = ({ children, closeModal }: IModal) => {
   }, []);
 
   return createPortal(
-    <div className={styles["Modal--overlay"]}>
-      <div className={styles.Modal}>
-        <div className={styles["Modal--header"]}>
-          <Button
-            onClick={closeModal}
-            className={styles["Modal--close-btn"]}
-            id="close-modal-btn"
-          >
-            <Image src="./images/xmark-icon.svg" alt="close modal" />
+    <div className={styles.overlay}>
+      <div className={styles.modal}>
+        <div className={styles.header}>
+          <Button onClick={closeModal} size="small" id="close-modal-btn">
+            <Image
+              size="iconL"
+              src="./images/xmark-icon.svg"
+              alt="close modal"
+            />
           </Button>
         </div>
-        {children}
+        <div className={styles.content}>{children}</div>
       </div>
     </div>,
     elRef.current

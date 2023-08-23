@@ -1,10 +1,9 @@
-import styles from "./Event.module.css";
-import usePositionEvent from "../../utils/usePositionEvent";
-import { UserEvent } from "../../types";
-import Button from "../Button/Button";
-import { useState } from "react";
-import Modal from "../Modal/Modal";
-import ModalEventInspection from "../ModalEventInspection/ModalEventInspection";
+import styles from './Event.module.scss';
+import usePositionEvent from '../../utils/usePositionEvent';
+import { UserEvent } from '../../types';
+import { useState } from 'react';
+import Modal from '../Modal/Modal';
+import ModalEventInspection from '../ModalEventInspection/ModalEventInspection';
 
 interface IEvents {
   data: UserEvent;
@@ -17,14 +16,14 @@ const Event = ({ data }: IEvents) => {
 
   return (
     <>
-      <Button
+      <button
         id={data.id.toString()}
-        className={styles.Event}
+        className={styles.event}
         onClick={handleModalClick}
         style={finalizedStyle}
       >
         {data.eventTitle}
-      </Button>
+      </button>
 
       {showModal ? (
         <Modal closeModal={() => setShowModal(false)}>

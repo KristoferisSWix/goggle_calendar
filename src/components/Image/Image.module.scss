@@ -1,8 +1,14 @@
-.Image {
+.image {
   object-fit: contain;
   object-position: center;
 }
-.icon {
+.iconS {
+  width: 8px;
+}
+.iconM {
+  width: 12px;
+}
+.iconL {
   width: 20px;
 }
 .auto {

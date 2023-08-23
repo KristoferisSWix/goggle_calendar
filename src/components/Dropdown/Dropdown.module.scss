@@ -1,0 +1,19 @@
+@use '../../style/mixins.module.scss';
+
+.dropdown {
+  @include mixins.text-preset(14px);
+  padding-inline-end: 10px;
+  border: 0;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.dropdown:hover {
+  background: rgba(211, 211, 211, 0.401);
+}
+
+// skin
+.standard {
+  padding-inline: 10px 35px;
+  padding-block: 10px;
+  border: 1px solid lightgray;
+}

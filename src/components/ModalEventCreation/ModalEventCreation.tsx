@@ -1,12 +1,12 @@
-import { FormEvent, useContext, useState } from "react";
-import styles from "./ModalEventCreation.module.css";
-import Button from "../Button/Button";
-import FormOption from "../FormOption/FormOption";
-import Dropdown from "../Dropdown/Dropdown";
-import Image from "../Image/Image";
-import Input from "../Input/Input";
-import formHandler from "../../utils/formHandler";
-import UserEventsContext from "../../context/UserEventsContext";
+import { FormEvent, useContext, useState } from 'react';
+import styles from './ModalEventCreation.module.scss';
+import Button from '../Button/Button';
+import FormOption from '../FormOption/FormOption';
+import Dropdown from '../Dropdown/Dropdown';
+import Image from '../Image/Image';
+import Input from '../Input/Input';
+import formHandler from '../../utils/formHandler';
+import UserEventsContext from '../../context/UserEventsContext';
 
 interface IModalEventCreation {
   closeModal: () => void;
@@ -25,7 +25,7 @@ const ModalEventCreation = ({ closeModal }: IModalEventCreation) => {
       if (e.target instanceof HTMLFormElement) {
         const formData = new FormData(e.target);
         const result = await formHandler(formData);
-        if (result?.status === "error") {
+        if (result?.status === 'error') {
           setError(result);
         } else {
           setUserEvents([]);
@@ -38,67 +38,68 @@ const ModalEventCreation = ({ closeModal }: IModalEventCreation) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className={styles.ModalEventCreation}
+      className={styles.modalEventCreation}
       id="modal-form"
     >
-      {error?.target === "uncought" && (
-        <p className={styles["Modal--error"]}>{error.message}</p>
+      {error?.target === 'uncought' && (
+        <p className={styles.error}>{error.message}</p>
       )}
       <FormOption
-        containerClassName={styles["title-container"]}
+        containerClassName={styles.titleContainer}
         id="event-title"
         labelChildren={null}
       >
         <Input
-          className={styles["title-input"]}
+          fill="fill"
+          skin="noDefault"
+          size="large"
           placeholder="Add title"
           id="event-title"
         />
       </FormOption>
-      {error?.target === "title" && (
-        <p className={styles["Modal--error"]}>{error.message}</p>
+      {error?.target === 'title' && (
+        <p className={styles.error}>{error.message}</p>
       )}
       <FormOption
         id="event-time"
         labelChildren={
-          <Image src="./images/clock-icon.svg" alt="date and time" />
+          <Image
+            src="./images/clock-icon.svg"
+            alt="date and time"
+            size="iconL"
+          />
         }
       >
-        <Input type="datetime-local" id="event-time" name="event-time-start" />
+        <Input
+          skin="noDefault"
+          type="datetime-local"
+          id="event-time"
+          name="event-time-start"
+        />
         -
         <Input
+          skin="noDefault"
           type="datetime-local"
           id="event-time-end"
           name="event-time-end"
         />
       </FormOption>
-      {error?.target === "time" && (
-        <p className={styles["Modal--error"]}>{error.message}</p>
+      {error?.target === 'time' && (
+        <p className={styles.error}>{error.message}</p>
       )}
       <FormOption
         id="event-guest"
-        labelChildren={<Image src="./images/users-icon.svg" alt="guests" />}
+        labelChildren={
+          <Image src="./images/users-icon.svg" alt="guests" size="iconL" />
+        }
       >
         <Input id="event-guest" placeholder="Add guests" />
       </FormOption>
-      <FormOption
-        labelChildren={
-          <Image src="./images/video-icon.svg" alt="video conference" />
-        }
-        id="video-conference"
-      >
-        <Button
-          className={styles["event-conference-btn"]}
-          type="button"
-          id="video-conference"
-        >
-          Add video conferencing
-        </Button>
-      </FormOption>
+
       <FormOption
         id="event-room"
         labelChildren={
-          <Image src="./images/door-icon.svg" alt="meeting room" />
+          <Image src="./images/door-icon.svg" alt="meeting room" size="iconL" />
         }
       >
         <Input id="event-room" placeholder="Add room" />
@@ -106,7 +107,7 @@ const ModalEventCreation = ({ closeModal }: IModalEventCreation) => {
       <FormOption
         id="event-location"
         labelChildren={
-          <Image src="./images/location-icon.svg" alt="location" />
+          <Image src="./images/location-icon.svg" alt="location" size="iconL" />
         }
       >
         <Input id="event-location" placeholder="Add location" />
@@ -114,7 +115,11 @@ const ModalEventCreation = ({ closeModal }: IModalEventCreation) => {
       <FormOption
         id="event-description"
         labelChildren={
-          <Image src="./images/message-icon.svg" alt="description" />
+          <Image
+            src="./images/message-icon.svg"
+            alt="description"
+            size="iconL"
+          />
         }
       >
         <Input id="event-description" placeholder="Add description" />
@@ -125,7 +130,7 @@ const ModalEventCreation = ({ closeModal }: IModalEventCreation) => {
           <Image
             src="./images/calendar-icon.svg"
             alt="host details"
-            size="icon"
+            size="iconL"
           />
         }
       >
@@ -141,7 +146,7 @@ const ModalEventCreation = ({ closeModal }: IModalEventCreation) => {
           <Image
             src="./images/briefcase-icon.svg"
             alt="event status"
-            size="icon"
+            size="iconL"
           />
         }
       >
@@ -149,12 +154,12 @@ const ModalEventCreation = ({ closeModal }: IModalEventCreation) => {
           id="event-status"
           optionArr={[
             {
-              value: "busy",
-              text: "Busy",
+              value: 'busy',
+              text: 'Busy',
             },
             {
-              value: "free",
-              text: "Free",
+              value: 'free',
+              text: 'Free',
             },
           ]}
         />
@@ -164,7 +169,7 @@ const ModalEventCreation = ({ closeModal }: IModalEventCreation) => {
           <Image
             src="./images/lock-icon.svg"
             alt="event visibility"
-            size="icon"
+            size="iconL"
           />
         }
         id="event-visibility"
@@ -173,23 +178,23 @@ const ModalEventCreation = ({ closeModal }: IModalEventCreation) => {
           id="event-visibility"
           optionArr={[
             {
-              value: "default",
-              text: "Default visibility",
+              value: 'default',
+              text: 'Default visibility',
             },
             {
-              value: "public",
-              text: "Public",
+              value: 'public',
+              text: 'Public',
             },
             {
-              value: "private",
-              text: "Private",
+              value: 'private',
+              text: 'Private',
             },
           ]}
         />
       </FormOption>
       <FormOption
         labelChildren={
-          <Image src="./images/alert-icon.svg" alt="event alert" size="icon" />
+          <Image src="./images/alert-icon.svg" alt="event alert" size="iconL" />
         }
         id="event-alert"
       >
@@ -197,41 +202,41 @@ const ModalEventCreation = ({ closeModal }: IModalEventCreation) => {
           id="event-alert"
           optionArr={[
             {
-              value: "5min",
-              text: "5 minutes before",
+              value: '5min',
+              text: '5 minutes before',
             },
             {
-              value: "10min",
-              text: "10 minutes before",
+              value: '10min',
+              text: '10 minutes before',
             },
             {
-              value: "15min",
-              text: "15 minutes before",
+              value: '15min',
+              text: '15 minutes before',
             },
             {
-              value: "30min",
-              text: "30 minutes before",
+              value: '30min',
+              text: '30 minutes before',
             },
             {
-              value: "1hour",
-              text: "1 hour before",
+              value: '1hour',
+              text: '1 hour before',
             },
             {
-              value: "1day",
-              text: "1 day before",
+              value: '1day',
+              text: '1 day before',
             },
             {
-              value: "none",
-              text: "None",
+              value: 'none',
+              text: 'None',
             },
           ]}
         />
       </FormOption>
-      <div className={styles["event-modal-footer"]}>
-        <Button className={styles["event-modal-more-options-btn"]}>
+      <div className={styles.footer}>
+        <Button type="button" skin="simple">
           More options
         </Button>
-        <Button className={styles["event-modal-save-btn"]} id="save-event-btn">
+        <Button skin="standard" id="save-event-btn">
           Save
         </Button>
       </div>
