@@ -2,16 +2,14 @@
 
 .event {
   @include mixins.text-preset(12px, 300);
-
   position: absolute;
   min-height: 15px;
-  padding-inline: 5px;
   border-radius: 5px;
   color: rgb(0, 110, 255);
   border: 1px solid rgb(0, 110, 255);
   background: white;
   user-select: none;
+  cursor: pointer;
   text-align: start;
   overflow: hidden;
-  transition: 0s;
 }

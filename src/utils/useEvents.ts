@@ -25,6 +25,8 @@ const useEvents = () => {
     return ref.current;
   };
 
+  const deepCheckedUserEvents = useDeepCompareMemoize(userEvents);
+
   useEffect(() => {
     setViewingWeek(date.getWeekInfo());
   }, [date]);
@@ -77,7 +79,7 @@ const useEvents = () => {
         setUserEvents(filteredArr);
       })
       .catch((e) => console.log(e));
-  }, [useDeepCompareMemoize(userEvents), setUserEvents, viewingWeek]);
+  }, [deepCheckedUserEvents, setUserEvents, viewingWeek]);
 };
 
 export default useEvents;

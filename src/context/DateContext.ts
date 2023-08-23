@@ -1,5 +1,5 @@
-import { Dispatch, SetStateAction, createContext } from "react";
-import DateProvider from "../utils/DateProvider";
+import { Dispatch, SetStateAction, createContext } from 'react';
+import DateProvider from '../utils/DateProvider';
 
 const DateContext = createContext<
   [DateProvider, Dispatch<SetStateAction<DateProvider>>]

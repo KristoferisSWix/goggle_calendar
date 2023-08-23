@@ -1,5 +1,5 @@
-import { EVENTS_URL } from "../constants";
-import { UserEvent } from "../types";
+import { EVENTS_URL } from '../constants';
+import { UserEvent } from '../types';
 
 const formHandler = async (formData: FormData) => {
   const formDataValues = [...formData.entries()];
@@ -14,15 +14,15 @@ const formHandler = async (formData: FormData) => {
 
   function validateFields(values: [string, FormDataEntryValue][]) {
     const titleValue = values.filter((field) =>
-      field[0].includes("event-title")
+      field[0].includes('event-title')
     )[0];
     const dateValues = values.filter((field) =>
-      field[0].includes("event-time")
+      field[0].includes('event-time')
     );
     const eventStartDate = new Date(dateValues[0][1].toString());
     const eventEndDate = new Date(dateValues[1][1].toString());
     const hasTitle = Boolean(
-      typeof titleValue[1] === "string" ? titleValue[1]?.trim().length : false
+      typeof titleValue[1] === 'string' ? titleValue[1]?.trim().length : false
     );
     const endTimeGreaterThanStart =
       new Date(eventStartDate).getTime() < new Date(eventEndDate).getTime();
@@ -30,16 +30,16 @@ const formHandler = async (formData: FormData) => {
 
     if (!hasTitle) {
       return {
-        status: "error",
-        target: "title",
-        message: "invalid title",
+        status: 'error',
+        target: 'title',
+        message: 'invalid title',
       };
     }
     if (!endTimeGreaterThanStart || isSameDay) {
       return {
-        status: "error",
-        target: "time",
-        message: "invalid time",
+        status: 'error',
+        target: 'time',
+        message: 'invalid time',
       };
     }
     return true;
@@ -58,7 +58,7 @@ const formHandler = async (formData: FormData) => {
 
     for (const field of values) {
       const key = camelize(field[0]) as keyof UserEvent;
-      if (typeof field[1] === "string" || typeof field[1] === "number") {
+      if (typeof field[1] === 'string' || typeof field[1] === 'number') {
         manipulateObj(formatedObj, key, field[1]);
       }
     }
@@ -69,21 +69,21 @@ const formHandler = async (formData: FormData) => {
   async function postEvent(data: UserEvent) {
     try {
       const response = await fetch(EVENTS_URL, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
       });
 
       await response.json();
-      return { status: "success" };
+      return { status: 'success' };
     } catch (error) {
-      console.error("Error:", error);
+      console.error('Error:', error);
       return {
-        status: "error",
-        target: "uncought",
-        message: "something went wrong ",
+        status: 'error',
+        target: 'uncought',
+        message: 'something went wrong ',
       };
     }
   }

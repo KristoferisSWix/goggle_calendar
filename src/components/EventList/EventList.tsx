@@ -1,7 +1,7 @@
-import { useContext } from "react";
-import Event from "../Event/Event";
-import UserEventsContext from "../../context/UserEventsContext";
-import useEvents from "../../utils/useEvents";
+import { useContext } from 'react';
+import Event from '../Event/Event';
+import UserEventsContext from '../../context/UserEventsContext';
+import useEvents from '../../utils/useEvents';
 
 const EventList = () => {
   const [userEvents] = useContext(UserEventsContext);

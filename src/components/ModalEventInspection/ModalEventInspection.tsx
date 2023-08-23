@@ -55,12 +55,12 @@ const ModalEventInspection = ({ closeModal, id }: IModalEventCreation) => {
       );
     }
     return (
-      <>
+      <div className={styles.container}>
         {display}
         <Button skin="destructive" size="large" onClick={handleClick}>
           Remove Event
         </Button>
-      </>
+      </div>
     );
   }
   return <p>loading</p>;

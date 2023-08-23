@@ -1,5 +1,6 @@
 @use '../../style/mixins.module.scss';
 
+// default
 .input {
   @include mixins.text-preset(14px);
 }

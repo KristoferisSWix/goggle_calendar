@@ -1,5 +1,5 @@
-import { WEEK_LENGTH } from "../constants";
-import { dayParams } from "../types";
+import { WEEK_LENGTH } from '../constants';
+import { dayParams } from '../types';
 
 export default class DateProvider {
   currentYear;
@@ -16,7 +16,7 @@ export default class DateProvider {
 
   // week getters
   private getWeekDayName(weekDay: number) {
-    const dayNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+    const dayNames = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
     return dayNames[weekDay];
   }
@@ -104,28 +104,28 @@ export default class DateProvider {
       month = this.getViewingDateFromWeekOffset().getMonth();
     }
     const monthNames = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ];
     return monthNames[month];
   }
   // misc
   getOffsetGMT() {
     function isSingleDigit(n: number) {
-      return `${n < 10 ? "0" : ""}${n}`;
+      return `${n < 10 ? '0' : ''}${n}`;
     }
     let offset = new Date().getTimezoneOffset();
-    const sign = offset < 0 ? "+" : "-";
+    const sign = offset < 0 ? '+' : '-';
     offset = Math.abs(offset);
     return sign + isSingleDigit(offset / 60 || 0);
   }
