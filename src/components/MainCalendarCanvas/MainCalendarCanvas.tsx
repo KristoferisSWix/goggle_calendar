@@ -7,15 +7,6 @@ import EventList from '../EventList/EventList';
 import styles from './MainCalendarCanvas.module.scss';
 
 const MainCalendarCanvas = () => {
-  const mainCalendarCanvas = [];
-  for (let i = 0; i < WEEK_LENGTH; i++) {
-    const day = [];
-    for (let j = 0; j <= HOURS_IN_DAY; j++) {
-      day.push(<div key={`${i}-${j}`} className={styles.cell}></div>);
-    }
-    mainCalendarCanvas.push(day);
-  }
-
   return (
     <>
       <article className={styles.timeColumn}>
@@ -28,7 +19,11 @@ const MainCalendarCanvas = () => {
         })}
       </article>
       <article className={styles.mainCalendarCanvas}>
-        {mainCalendarCanvas}
+        {Array.from({ length: WEEK_LENGTH }, (_, i) =>
+          Array.from({ length: HOURS_IN_DAY + 1 }, (_, j) => (
+            <div key={`${i}-${j}`} className={styles.cell}></div>
+          ))
+        )}
         <EventList />
       </article>
     </>

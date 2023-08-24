@@ -9,13 +9,16 @@
 .fill {
   width: 100%;
 }
+
 // skin
 .noDefault {
   border: 0;
 }
+
 .noDefault:focus {
   outline: none;
 }
+
 // size
 .large {
   @include mixins.text-preset(22px);

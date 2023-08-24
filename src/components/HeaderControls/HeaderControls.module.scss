@@ -8,5 +8,6 @@
 
 .heading {
   @include mixins.text-preset(22px);
+
   margin-inline-end: 60px;
 }

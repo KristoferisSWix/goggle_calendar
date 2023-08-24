@@ -7,10 +7,13 @@
   margin-block: 20px 10px;
   padding-inline: 9px;
 }
+
 .heading {
   @include mixins.text-preset(18px);
+
   margin: 0;
 }
+
 .controls {
   display: flex;
   align-items: center;

@@ -13,19 +13,15 @@ const MainCalendarHeader = () => {
         return (
           <h3
             key={`main-${day.weekDayName}`}
-            className={
-              day.isCurrentDay
-                ? cx(styles.heading, styles.headingActive)
-                : styles.heading
-            }
+            className={cx(styles.heading, {
+              [styles.headingActive]: day.isCurrentDay,
+            })}
           >
             {day.weekDayName} <br />
             <span
-              className={
-                day.isCurrentDay
-                  ? styles.headingNumberActive
-                  : styles.headingNumber
-              }
+              className={cx(styles.headingNumber, {
+                [styles.headingNumberActive]: day.isCurrentDay,
+              })}
             >
               {day.day}
             </span>

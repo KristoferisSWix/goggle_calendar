@@ -1,62 +1,78 @@
 @use '../../style/mixins.module.scss';
 
-// sizes
-.small {
-  @include mixins.text-preset(14px);
-  padding: 4px 8px;
-  border-radius: 8px;
-}
-.medium {
-  @include mixins.text-preset(16px);
-  padding: 8px 12px;
-  border-radius: 10px;
-}
-.large {
-  @include mixins.text-preset(18px);
-  padding: 12px 16px;
-  border-radius: 15px;
-}
-// skins
-.none {
-  border: none;
-  background: none;
-}
-.standard {
-  border: 1px solid rgb(0, 110, 255);
-  color: black;
-  background: white;
-}
-.standard:hover {
-  background: rgb(226, 226, 226);
-}
-.simple {
-  border: 1px solid lightgray;
-  color: black;
-  background: white;
-}
-.simple:hover {
-  background: rgb(182, 182, 182);
-}
-.destructive {
-  border: 1px solid red;
-  color: black;
-  background: white;
-}
-.destructive:hover {
-  background: rgb(226, 226, 226);
-}
-// themes
-.active {
-  color: white;
-  background: rgb(0, 110, 255);
-}
-
 // default
 .button {
   transition: 0.2s ease;
   width: fit-content;
   cursor: pointer;
 }
+
 .button:hover {
-  background-color: rgba(211, 211, 211, 0.267);
+  background-color: rgb(211 211 211 / 26.7%);
 }
+
+
+// sizes
+.small {
+  @include mixins.text-preset(14px);
+
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+.medium {
+  @include mixins.text-preset(16px);
+
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+
+.large {
+  @include mixins.text-preset(18px);
+
+  padding: 12px 16px;
+  border-radius: 15px;
+}
+
+// skins
+.none {
+  border: none;
+  background: none;
+}
+
+.standard {
+  border: 1px solid rgb(0 110 255);
+  color: black;
+  background: white;
+}
+
+.standard:hover {
+  background: rgb(226 226 226);
+}
+
+.simple {
+  border: 1px solid lightgray;
+  color: black;
+  background: white;
+}
+
+.simple:hover {
+  background: rgb(182 182 182);
+}
+
+.destructive {
+  border: 1px solid red;
+  color: black;
+  background: white;
+}
+
+.destructive:hover {
+  background: rgb(226 226 226);
+}
+
+// themes
+.active {
+  color: white;
+  background: rgb(0 110 255);
+}
+

@@ -14,8 +14,9 @@
   border-bottom: 1px solid lightgray;
   transition: 0.2s ease-in-out;
 }
+
 .titleContainer:focus-within {
-  border-bottom: 2px solid rgb(0, 110, 255);
+  border-bottom: 2px solid rgb(0 110 255);
 }
 
 .footer {
