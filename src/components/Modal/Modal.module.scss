@@ -1,0 +1,29 @@
+/* Event modal */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: rgb(0 0 0 / 34.6%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: white;
+  border-radius: 10px;
+  width: 50vw;
+  overflow: hidden;
+}
+
+.content {
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 35px;
+  background: rgb(211 211 211 / 24.6%);
+}

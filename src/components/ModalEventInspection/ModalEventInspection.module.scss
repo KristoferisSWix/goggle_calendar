@@ -1,0 +1,17 @@
+@use '../../style/mixins.module.scss';
+
+.info {
+  @include mixins.text-preset(18px, 300);
+
+  margin-block: 5px;
+  text-transform: capitalize;
+}
+
+.info span {
+  font-weight: 400;
+}
+
+.container {
+  display: grid;
+  gap: 10px;
+}

@@ -1,0 +1,42 @@
+@use '../../style/mixins.module.scss';
+
+.mainCalendarCanvas {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  position: relative;
+  grid-template-rows: repeat(24, 50px);
+}
+
+.timeColumn {
+  display: grid;
+  grid-template-rows: repeat(24, 50px);
+}
+
+.cell {
+  border: 1px solid lightgray;
+  height: 50px;
+}
+
+.cell + .cell,
+.cell:first-child {
+  border-top: none;
+  border-right: none;
+}
+
+.timeContainer {
+  border-bottom: 1px solid lightgray;
+  text-align: center;
+  height: 50px;
+}
+
+.timeContent {
+  @include mixins.text-preset;
+
+  position: relative;
+  top: -18px;
+  left: 0;
+  color: gray;
+  width: 50px;
+  background: white;
+  z-index: 0;
+}

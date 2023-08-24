@@ -1,0 +1,7 @@
+@use '../../style/mixins.module.scss';
+
+.sidebar {
+  padding: 20px;
+  display: grid;
+  align-content: flex-start;
+}
