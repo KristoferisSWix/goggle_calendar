@@ -1,11 +1,11 @@
 import { WEEK_LENGTH } from '../constants';
-import { dayParams } from '../types';
+import { DayParams } from '../types';
 import generateFullWeekInformation from './generateWeekInfo';
 
 const date = new Date();
 
 export default function getMonthInfo(monthOffset = 0, weekOffset = 0) {
-  const returnArr: dayParams[] = [];
+  const returnArr: DayParams[] = [];
   const initialDate = new Date(
     date.getFullYear(),
     date.getMonth() + monthOffset,
