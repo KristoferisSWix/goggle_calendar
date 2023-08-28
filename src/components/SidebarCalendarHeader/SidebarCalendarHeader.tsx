@@ -1,9 +1,11 @@
-import { useContext } from 'react';
 import Button from '../Button/Button';
 import styles from './SidebarCalendarHeader.module.scss';
-import DateContext from '../../context/DateContext';
 import { FullMonthNames } from '../../types';
 import Image from '../Image/Image';
+import getMonthName from '../../utils/getMonthName';
+import getFullYear from '../../utils/getFullYear';
+import { useContext } from 'react';
+import WeekOffsetContext from '../../context/WeekOffsetContext';
 
 interface ISidebarCalendarHeader {
   monthOffsetState: [number, React.Dispatch<React.SetStateAction<number>>];
@@ -12,15 +14,12 @@ interface ISidebarCalendarHeader {
 const SidebarCalendarHeader = ({
   monthOffsetState,
 }: ISidebarCalendarHeader) => {
-  const [date] = useContext(DateContext);
+  const [weekOffset] = useContext(WeekOffsetContext);
   const [monthOffset, setMonthOffset] = monthOffsetState;
 
   const displayMonthName =
-    FullMonthNames[
-      date.getMonthName(monthOffset) as keyof typeof FullMonthNames
-    ];
-  const displayYear = date.parseDateFromMonthOffset(monthOffset).year;
-
+    FullMonthNames[getMonthName(monthOffset, weekOffset)];
+  const displayYear = getFullYear(monthOffset, weekOffset);
   const handleClickPrev = () => {
     setMonthOffset((lastOffset) => lastOffset - 1);
   };

@@ -1,13 +1,14 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import { EVENTS_URL } from '../constants';
 import { UserEvent } from '../types';
-import DateContext from '../context/DateContext';
 import UserEventsContext from '../context/UserEventsContext';
+import WeekOffsetContext from '../context/WeekOffsetContext';
+import getWeekInfo from './getWeekInfo';
 
 const useEvents = () => {
-  const [date] = useContext(DateContext);
+  const [weekOffset] = useContext(WeekOffsetContext);
   const [userEvents, setUserEvents] = useContext(UserEventsContext);
-  const [viewingWeek, setViewingWeek] = useState(date.getWeekInfo());
+  const [viewingWeek, setViewingWeek] = useState(getWeekInfo());
 
   const useDeepCompareMemoize = (value: UserEvent[]) => {
     const deepCompareEquals = (a1: UserEvent[], a2: UserEvent[]) => {
@@ -28,8 +29,8 @@ const useEvents = () => {
   const deepCheckedUserEvents = useDeepCompareMemoize(userEvents);
 
   useEffect(() => {
-    setViewingWeek(date.getWeekInfo());
-  }, [date]);
+    setViewingWeek(getWeekInfo(weekOffset));
+  }, [weekOffset]);
 
   useEffect(() => {
     const {

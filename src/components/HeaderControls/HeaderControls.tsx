@@ -1,21 +1,19 @@
 import { useContext } from 'react';
 import Button from '../Button/Button';
 import styles from './HeaderControls.module.scss';
-import DateContext from '../../context/DateContext';
-import DateProvider from '../../utils/DateProvider';
 import { FullMonthNames } from '../../types';
 import Image from '../Image/Image';
+import getMonthName from '../../utils/getMonthName';
+import getFullYear from '../../utils/getFullYear';
+import WeekOffsetContext from '../../context/WeekOffsetContext';
 
 const HeaderControls = () => {
-  const [date, setDate] = useContext(DateContext);
-  const displayMonthName =
-    FullMonthNames[date.getMonthName() as keyof typeof FullMonthNames];
-  const { year: displayYear } = date.parseDateFromMonthOffset(0);
-  const handleClickPrev = () =>
-    setDate(({ weekOffset }) => new DateProvider(weekOffset - 1));
-  const handleClickNext = () =>
-    setDate(({ weekOffset }) => new DateProvider(weekOffset + 1));
-  const handleClickToday = () => setDate(new DateProvider(0));
+  const [weekOffset, setWeekOffset] = useContext(WeekOffsetContext);
+  const displayMonthName = FullMonthNames[getMonthName(undefined, weekOffset)];
+  const displayYear = getFullYear(undefined, weekOffset);
+  const handleClickPrev = () => setWeekOffset((weekOffset) => weekOffset - 1);
+  const handleClickNext = () => setWeekOffset((weekOffset) => weekOffset + 1);
+  const handleClickToday = () => setWeekOffset(0);
 
   return (
     <div className={styles.headerControls}>
