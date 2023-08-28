@@ -1,13 +1,13 @@
 import { DAY_NAMES, WEEK_LENGTH } from '../constants';
-import { dayParams } from '../types';
+import { DayParams } from '../types';
 
 const date = new Date();
 
-export default function generateFullWeekInformation(
+export default function generateWeekInfo(
   viewingDate: Date,
   targetedMonth = date.getMonth()
 ) {
-  const returnArr: dayParams[] = [];
+  const weekInfo: DayParams[] = [];
   const firstDayOfWeek = viewingDate.getDate() - viewingDate.getDay();
 
   for (let i = 0; i < WEEK_LENGTH; i++) {
@@ -23,7 +23,7 @@ export default function generateFullWeekInformation(
       date.getFullYear() === saveDate.getFullYear();
     const isCurrentMonthCheck = targetedMonth === saveDate.getMonth();
 
-    returnArr.push({
+    weekInfo.push({
       year: saveDate.getFullYear(),
       month: saveDate.getMonth(),
       day: saveDate.getDate(),
@@ -32,5 +32,5 @@ export default function generateFullWeekInformation(
       isCurrentMonth: isCurrentMonthCheck,
     });
   }
-  return returnArr;
+  return weekInfo;
 }

@@ -1,6 +1,6 @@
 import styles from './SidebarCalendarBody.module.scss';
 import cx from 'classnames';
-import { dayParams } from '../../types';
+import { DayParams } from '../../types';
 import Button from '../Button/Button';
 import getMonthInfo from '../../utils/getMonthInfo';
 import WeekOffsetContext from '../../context/WeekOffsetContext';
@@ -25,7 +25,7 @@ const SidebarCalendarBody = ({ monthOffset }: ISidebarCalendarBody) => {
         );
       })}
       {monthInfo.map(
-        ({ year, month, day, isCurrentMonth, isCurrentDay }: dayParams) => {
+        ({ year, month, day, isCurrentMonth, isCurrentDay }: DayParams) => {
           return (
             <div key={`${year}-${month}-${day}`} className={styles.box}>
               <Button
