@@ -1,11 +1,13 @@
 import { useContext } from 'react';
 import styles from './MainCalendarHeader.module.scss';
 import cx from 'classnames';
-import DateContext from '../../context/DateContext';
+import WeekOffsetContext from '../../context/WeekOffsetContext';
+import getWeekInfo from '../../utils/getWeekInfo';
+import getOffsetGMT from '../../utils/getOffsetGMT';
 
 const MainCalendarHeader = () => {
-  const [date] = useContext(DateContext);
-  const weekInfo = date.getWeekInfo();
+  const [weekOffset] = useContext(WeekOffsetContext);
+  const weekInfo = getWeekInfo(weekOffset);
 
   return (
     <section className={styles.mainCalendarHeader}>
@@ -29,7 +31,7 @@ const MainCalendarHeader = () => {
         );
       })}
       <h3 className={styles.GMT} id="main-calendar-gmt">
-        GMT{date.getOffsetGMT()}
+        GMT{getOffsetGMT()}
       </h3>
     </section>
   );

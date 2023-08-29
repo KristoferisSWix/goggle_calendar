@@ -30,3 +30,5 @@ export const MAIN_CALENDAR_TIMES = [
   '22:00',
   '23:00',
 ];
+
+export const DAY_NAMES = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];

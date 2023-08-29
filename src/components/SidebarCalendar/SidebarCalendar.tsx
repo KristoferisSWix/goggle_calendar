@@ -5,10 +5,10 @@ import SidebarCalendarHeader from '../SidebarCalendarHeader/SidebarCalendarHeade
 import styles from './SidebarCalendar.module.scss';
 import Modal from '../Modal/Modal';
 import ModalEventCreation from '../ModalEventCreation/ModalEventCreation';
-import DateContext from '../../context/DateContext';
+import WeekOffsetContext from '../../context/WeekOffsetContext';
 
 const SidebarCalendar = () => {
-  const [date] = useContext(DateContext);
+  const [weekOffset] = useContext(WeekOffsetContext);
   const [showModal, setShowModal] = useState(false);
   const monthOffsetState = useState(0);
   const [, setMonthOffset] = monthOffsetState;
@@ -16,7 +16,7 @@ const SidebarCalendar = () => {
   const handleModalClick = () => setShowModal(true);
   useEffect(() => {
     setMonthOffset(0);
-  }, [date, setMonthOffset]);
+  }, [weekOffset, setMonthOffset]);
 
   return (
     <aside className={styles.sidebar}>

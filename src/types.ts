@@ -13,23 +13,21 @@ export interface UserEvent {
   _timesOverlapping?: number;
 }
 
-export type formDataValues = [string, FormDataEntryValue][];
-export type isTodayType = { year: number; month: number; day: number };
 export enum FullMonthNames {
-  "Jan" = "January",
-  "Feb" = "February",
-  "Mar" = "March",
-  "Apr" = "April",
-  "May" = "May",
-  "Jun" = "June",
-  "Jul" = "July",
-  "Aug" = "August",
-  "Sep" = "September",
-  "Oct" = "October",
-  "Nov" = "November",
-  "Dec" = "December",
+  'Jan' = 'January',
+  'Feb' = 'February',
+  'Mar' = 'March',
+  'Apr' = 'April',
+  'May' = 'May',
+  'Jun' = 'June',
+  'Jul' = 'July',
+  'Aug' = 'August',
+  'Sep' = 'September',
+  'Oct' = 'October',
+  'Nov' = 'November',
+  'Dec' = 'December',
 }
-export interface dayParams {
+export interface DayParams {
   year: number;
   month: number;
   day: number;
