@@ -10,7 +10,10 @@ const MainCalendarHeader = () => {
   const weekInfo = getWeekInfo(weekOffset);
 
   return (
-    <section className={styles.mainCalendarHeader}>
+    <section
+      className={styles.mainCalendarHeader}
+      data-testid="mainCalendarHeader"
+    >
       {weekInfo.map((day) => {
         return (
           <h3

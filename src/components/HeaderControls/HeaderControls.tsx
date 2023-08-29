@@ -30,25 +30,34 @@ const HeaderControls = () => {
         id="show-today-btn"
         skin="simple"
         size="medium"
+        testId="todayButton"
       >
         Today
       </Button>
-      <Button id="prev-period-btn" onClick={handleClickPrev}>
+      <Button
+        id="prev-period-btn"
+        onClick={handleClickPrev}
+        testId="prevWeekButton"
+      >
         <Image
           size="iconM"
           src="./images/chevron-left-icon.svg"
           alt="change timeframe to past"
         />
       </Button>
-      <Button id="next-period-btn" onClick={handleClickNext}>
+      <Button
+        id="next-period-btn"
+        onClick={handleClickNext}
+        testId="nextWeekButton"
+      >
         <Image
           size="iconM"
           src="./images/chevron-right-icon.svg"
           alt="change timeframe to future"
         />
       </Button>
-      <h3 className={styles.heading} id="header-date">
-        {displayMonthName} {displayYear}
+      <h3 className={styles.heading} id="header-date" data-testid="headerDate">
+        {displayMonthName}, {displayYear}
       </h3>
     </div>
   );

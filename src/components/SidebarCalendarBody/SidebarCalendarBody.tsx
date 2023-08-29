@@ -31,6 +31,7 @@ const SidebarCalendarBody = ({ monthOffset }: ISidebarCalendarBody) => {
               <Button
                 size="small"
                 theme={isCurrentMonth && isCurrentDay ? 'active' : undefined}
+                testId="sideCalendarElement"
               >
                 <span
                   className={cx(

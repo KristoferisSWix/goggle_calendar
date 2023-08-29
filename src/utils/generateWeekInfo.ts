@@ -1,12 +1,12 @@
 import { DAY_NAMES, WEEK_LENGTH } from '../constants';
 import { DayParams } from '../types';
 
-const date = new Date();
-
 export default function generateWeekInfo(
   viewingDate: Date,
-  targetedMonth = date.getMonth()
+  targetedMonth = new Date().getMonth()
 ) {
+  const date = new Date();
+
   const weekInfo: DayParams[] = [];
   const firstDayOfWeek = viewingDate.getDate() - viewingDate.getDay();
 
