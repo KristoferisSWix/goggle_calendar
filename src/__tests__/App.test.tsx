@@ -67,3 +67,19 @@ describe('display', () => {
     });
   });
 });
+describe('sidebarCalendar', () => {
+  it('rerenders when sidebar calendar timeframe is changed', () => {});
+  it('rerenders when main calendar timeframe is changed', () => {});
+});
+describe('mainCalendar', () => {
+  it('rerenders when main calendar timeframe is changed', () => {});
+  it('rerenders when main calendar timeframe is reset (today button)', () => {});
+});
+describe('useEvent', () => {
+  it('displays event if there are any at viewing date', () => {});
+  it("doesn't display event if there are none at viewing date", () => {});
+});
+describe('Modals', () => {
+  it('opens creationModal when clicked "create event" button', () => {});
+  it('opens interactionModal when clicked an event', () => {});
+});

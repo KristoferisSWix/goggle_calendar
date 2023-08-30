@@ -17,13 +17,12 @@ interface IButton {
 const Button = ({
   children,
   onClick,
-  id,
   type,
   style,
   size = 'medium',
   theme,
   skin = 'none',
-  testId = '',
+  testId,
 }: IButton) => {
   return (
     <button
@@ -40,8 +39,10 @@ const Button = ({
         [styles.medium]: size === 'medium',
         [styles.large]: size === 'large',
       })}
-      id={id}
       data-testid={testId}
+      data-size={size}
+      data-theme={theme}
+      data-skin={skin}
     >
       {children}
     </button>

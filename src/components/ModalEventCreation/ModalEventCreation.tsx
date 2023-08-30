@@ -24,7 +24,9 @@ const ModalEventCreation = ({ closeModal }: IModalEventCreation) => {
     (async () => {
       if (e.target instanceof HTMLFormElement) {
         const formData = new FormData(e.target);
-        const result = await formHandler(formData);
+        const formDataValues = [...formData.entries()];
+
+        const result = await formHandler(formDataValues);
         if (result?.status === 'error') {
           setError(result);
         } else {
@@ -236,9 +238,7 @@ const ModalEventCreation = ({ closeModal }: IModalEventCreation) => {
         <Button type="button" skin="simple">
           More options
         </Button>
-        <Button skin="standard" id="save-event-btn">
-          Save
-        </Button>
+        <Button skin="standard">Save</Button>
       </div>
     </form>
   );

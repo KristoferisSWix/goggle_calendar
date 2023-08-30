@@ -30,7 +30,7 @@ const Modal = ({ children, closeModal }: IModal) => {
     <div className={styles.overlay}>
       <div className={styles.modal}>
         <div className={styles.header}>
-          <Button onClick={closeModal} size="small" id="close-modal-btn">
+          <Button onClick={closeModal} size="small">
             <Image
               size="iconL"
               src="./images/xmark-icon.svg"

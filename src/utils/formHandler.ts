@@ -1,18 +1,17 @@
 import { EVENTS_URL } from '../constants';
 import { UserEvent } from '../types';
-
-const formHandler = async (formData: FormData) => {
-  const formDataValues = [...formData.entries()];
-  const validationResult = validateFields(formDataValues);
+type dataFormat = [string, FormDataEntryValue][] | [string, string][];
+const formHandler = async (formData: dataFormat) => {
+  const validationResult = validateFields(formData);
   if (validationResult === true) {
-    const formatedForm = formateForm(formDataValues);
+    const formatedForm = formateForm(formData);
     const result = await postEvent(formatedForm);
     return result;
   } else {
     return validationResult;
   }
 
-  function validateFields(values: [string, FormDataEntryValue][]) {
+  function validateFields(values: dataFormat) {
     const titleValue = values.filter((field) =>
       field[0].includes('event-title')
     )[0];
@@ -44,7 +43,7 @@ const formHandler = async (formData: FormData) => {
     }
     return true;
   }
-  function formateForm(values: [string, FormDataEntryValue][]) {
+  function formateForm(values: dataFormat) {
     const camelize = (s: string) => s.replace(/-./g, (x) => x[1].toUpperCase());
     const manipulateObj = <Obj, Key extends keyof Obj>(
       obj: Obj,
