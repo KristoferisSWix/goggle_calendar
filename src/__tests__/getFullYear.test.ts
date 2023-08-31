@@ -8,36 +8,36 @@ afterAll(() => {
   vi.useRealTimers();
 });
 
-it('no args', () => {
-  expect(2001).toEqual(getFullYear());
+it('should return current year info when has no arguments passed', () => {
+  expect(getFullYear()).toEqual(2001);
 });
-describe('week offset', () => {
+describe('should return correct year given week offset', () => {
   it('positive', () => {
-    expect(2002).toEqual(getFullYear(undefined, 48));
+    expect(getFullYear(undefined, 48)).toEqual(2002);
   });
   it('negative', () => {
-    expect(2000).toEqual(getFullYear(undefined, -48));
+    expect(getFullYear(undefined, -48)).toEqual(2000);
   });
 });
-describe('month offset', () => {
+describe('should return correct year given month offset', () => {
   it('positive', () => {
-    expect(2002).toEqual(getFullYear(12));
+    expect(getFullYear(12)).toEqual(2002);
   });
   it('negative', () => {
-    expect(2000).toEqual(getFullYear(-12));
+    expect(getFullYear(-12)).toEqual(2000);
   });
 });
-describe('both offset', () => {
+describe('should return correct year given week and month offsets', () => {
   it('both positive', () => {
-    expect(2003).toEqual(getFullYear(12, 48));
+    expect(getFullYear(12, 48)).toEqual(2003);
   });
   it('both negative', () => {
-    expect(1999).toEqual(getFullYear(-12, -48));
+    expect(getFullYear(-12, -48)).toEqual(1999);
   });
   it('month positive, week negative', () => {
-    expect(2002).toEqual(getFullYear(24, -48));
+    expect(getFullYear(24, -48)).toEqual(2002);
   });
   it('month negative, week positive', () => {
-    expect(2002).toEqual(getFullYear(-12, 96));
+    expect(getFullYear(-12, 96)).toEqual(2002);
   });
 });

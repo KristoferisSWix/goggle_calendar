@@ -7,10 +7,9 @@ import {
   beforeAll,
   afterAll,
 } from 'vitest';
-import { RenderResult, render, screen } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import SidebarCalendar from '../components/SidebarCalendar/SidebarCalendar';
 
-let sidebarCalendar: RenderResult;
 beforeAll(() => {
   vi.useFakeTimers().setSystemTime(new Date('2001-04-04'));
 });
@@ -18,15 +17,14 @@ afterAll(() => {
   vi.useRealTimers();
 });
 beforeEach(() => {
-  sidebarCalendar = render(<SidebarCalendar />);
+  render(<SidebarCalendar />);
 });
 afterEach(() => {
-  sidebarCalendar.unmount();
+  cleanup();
 });
 
 it('renders correct date', () => {
-  const expectedDate = `April, 2001`;
-  const renderedDate = screen.getByTestId('sidebarCalendarDate').innerText;
-
-  expect(renderedDate).toBe(expectedDate);
+  expect(screen.getByTestId('sidebarCalendarDate').innerText).toBe(
+    `April, 2001`
+  );
 });

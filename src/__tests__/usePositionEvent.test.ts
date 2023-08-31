@@ -2,20 +2,24 @@ import { expect, it } from 'vitest';
 import usePositionEvent from '../utils/usePositionEvent';
 import { renderHook } from '@testing-library/react';
 
+const dataScheme = {
+  eventTitle: '123',
+  eventTimeStart: '2023-08-30T11:00',
+  eventTimeEnd: '2023-08-30T12:00',
+  eventGuest: '',
+  eventRoom: '',
+  eventLocation: '',
+  eventDescription: '',
+  hostDetails: 'Kristoferis Solovjov',
+  eventStatus: 'busy',
+  eventVisibility: 'default',
+  eventAlert: '5min',
+  id: 50,
+};
+
 it('returns styles with no overlap', () => {
   const data = {
-    eventTitle: '123',
-    eventTimeStart: '2023-08-30T11:00',
-    eventTimeEnd: '2023-08-30T12:00',
-    eventGuest: '',
-    eventRoom: '',
-    eventLocation: '',
-    eventDescription: '',
-    hostDetails: 'Kristoferis Solovjov',
-    eventStatus: 'busy',
-    eventVisibility: 'default',
-    eventAlert: '5min',
-    id: 50,
+    ...dataScheme,
     _timesOverlapping: 0,
   };
   const hook = renderHook(() => usePositionEvent(data));
@@ -28,18 +32,7 @@ it('returns styles with no overlap', () => {
 });
 it('returns styles with  overlap', () => {
   const data = {
-    eventTitle: '123',
-    eventTimeStart: '2023-08-30T11:00',
-    eventTimeEnd: '2023-08-30T12:00',
-    eventGuest: '',
-    eventRoom: '',
-    eventLocation: '',
-    eventDescription: '',
-    hostDetails: 'Kristoferis Solovjov',
-    eventStatus: 'busy',
-    eventVisibility: 'default',
-    eventAlert: '5min',
-    id: 50,
+    ...dataScheme,
     _timesOverlapping: 1,
   };
   const hook = renderHook(() => usePositionEvent(data));

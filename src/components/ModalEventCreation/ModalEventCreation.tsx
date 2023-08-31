@@ -18,7 +18,6 @@ const ModalEventCreation = ({ closeModal }: IModalEventCreation) => {
     message?: string;
   } | null>(null);
   const [, setUserEvents] = useContext(UserEventsContext);
-
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     (async () => {
@@ -42,6 +41,7 @@ const ModalEventCreation = ({ closeModal }: IModalEventCreation) => {
       onSubmit={handleSubmit}
       className={styles.modalEventCreation}
       id="modal-form"
+      data-testid="creationModal"
     >
       {error?.target === 'uncought' && (
         <p className={styles.error}>{error.message}</p>
@@ -60,7 +60,9 @@ const ModalEventCreation = ({ closeModal }: IModalEventCreation) => {
         />
       </FormOption>
       {error?.target === 'title' && (
-        <p className={styles.error}>{error.message}</p>
+        <p data-testid="titleError" className={styles.error}>
+          {error.message}
+        </p>
       )}
       <FormOption
         id="event-time"
@@ -87,7 +89,9 @@ const ModalEventCreation = ({ closeModal }: IModalEventCreation) => {
         />
       </FormOption>
       {error?.target === 'time' && (
-        <p className={styles.error}>{error.message}</p>
+        <p data-testid="timeError" className={styles.error}>
+          {error.message}
+        </p>
       )}
       <FormOption
         id="event-guest"
@@ -238,7 +242,9 @@ const ModalEventCreation = ({ closeModal }: IModalEventCreation) => {
         <Button type="button" skin="simple">
           More options
         </Button>
-        <Button skin="standard">Save</Button>
+        <Button skin="standard" testId="saveEventButton">
+          Save
+        </Button>
       </div>
     </form>
   );

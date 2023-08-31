@@ -7,10 +7,9 @@ import {
   beforeAll,
   afterAll,
 } from 'vitest';
-import { RenderResult, render, screen } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import HeaderControls from '../components/HeaderControls/HeaderControls';
 
-let headerControls: RenderResult;
 beforeAll(() => {
   vi.useFakeTimers().setSystemTime(new Date('2001-04-04'));
 });
@@ -18,15 +17,12 @@ afterAll(() => {
   vi.useRealTimers();
 });
 beforeEach(() => {
-  headerControls = render(<HeaderControls />);
+  render(<HeaderControls />);
 });
 afterEach(() => {
-  headerControls.unmount();
+  cleanup();
 });
 
 it('renders correct date', () => {
-  const expectedDate = `April, 2001`;
-  const renderedDate = screen.getByTestId('headerDate').innerText;
-
-  expect(renderedDate).toBe(expectedDate);
+  expect(screen.getByTestId('headerDate').innerText).toBe(`April, 2001`);
 });

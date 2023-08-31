@@ -20,7 +20,12 @@ const SidebarCalendar = () => {
 
   return (
     <aside className={styles.sidebar}>
-      <Button onClick={handleModalClick} skin="simple" size="large">
+      <Button
+        testId="createEvent"
+        onClick={handleModalClick}
+        skin="simple"
+        size="large"
+      >
         Create Event
       </Button>
       {showModal ? (

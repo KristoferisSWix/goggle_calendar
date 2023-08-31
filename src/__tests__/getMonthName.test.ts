@@ -8,10 +8,10 @@ afterAll(() => {
   vi.useRealTimers();
 });
 
-it('no args', () => {
+it('should return current month name info when has no arguments passed', () => {
   expect('Apr').toEqual(getMonthName());
 });
-describe('week offset', () => {
+describe('should return correct month name info when passed week offset', () => {
   it('positive', () => {
     expect('May').toEqual(getMonthName(undefined, 4));
   });
@@ -19,7 +19,7 @@ describe('week offset', () => {
     expect('Mar').toEqual(getMonthName(undefined, -4));
   });
 });
-describe('month offset', () => {
+describe('should return correct month name info when passed month offset', () => {
   it('positive', () => {
     expect('May').toEqual(getMonthName(1));
   });
@@ -27,7 +27,7 @@ describe('month offset', () => {
     expect('Mar').toEqual(getMonthName(-1));
   });
 });
-describe('both offset', () => {
+describe('should return correct month name info when passed week and month offset', () => {
   it('both positive', () => {
     expect('Jun').toEqual(getMonthName(1, 4));
   });

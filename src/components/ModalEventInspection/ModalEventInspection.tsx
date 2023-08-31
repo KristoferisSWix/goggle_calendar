@@ -57,7 +57,12 @@ const ModalEventInspection = ({ closeModal, id }: IModalEventCreation) => {
     return (
       <div className={styles.container}>
         {display}
-        <Button skin="destructive" size="large" onClick={handleClick}>
+        <Button
+          skin="destructive"
+          size="large"
+          onClick={handleClick}
+          data-testid="removeEvent"
+        >
           Remove Event
         </Button>
       </div>

@@ -8,7 +8,7 @@ afterAll(() => {
   vi.useRealTimers();
 });
 
-it('no args', () => {
+it('should return current month info when has no arguments passed', () => {
   const expectedResult = [
     {
       year: 2001,
@@ -347,9 +347,9 @@ it('no args', () => {
       isCurrentMonth: false,
     },
   ];
-  expect(expectedResult).toEqual(getMonthInfo());
+  expect(getMonthInfo()).toEqual(expectedResult);
 });
-describe('week offset', () => {
+describe('should return correct month given week offset', () => {
   it('positive', () => {
     const expectedResult = [
       {
@@ -689,7 +689,7 @@ describe('week offset', () => {
         isCurrentMonth: false,
       },
     ];
-    expect(expectedResult).toEqual(getMonthInfo(undefined, 1));
+    expect(getMonthInfo(undefined, 1)).toEqual(expectedResult);
   });
   it('negative', () => {
     const expectedResult = [
@@ -1030,10 +1030,10 @@ describe('week offset', () => {
         isCurrentMonth: false,
       },
     ];
-    expect(expectedResult).toEqual(getMonthInfo(undefined, -1));
+    expect(getMonthInfo(undefined, -1)).toEqual(expectedResult);
   });
 });
-describe('month offset', () => {
+describe('should return correct month given month offset', () => {
   it('positive', () => {
     const expectedResult = [
       {
@@ -1373,7 +1373,7 @@ describe('month offset', () => {
         isCurrentMonth: false,
       },
     ];
-    expect(expectedResult).toEqual(getMonthInfo(1));
+    expect(getMonthInfo(1)).toEqual(expectedResult);
   });
   it('negative', () => {
     const expectedResult = [
@@ -1714,10 +1714,10 @@ describe('month offset', () => {
         isCurrentMonth: false,
       },
     ];
-    expect(expectedResult).toEqual(getMonthInfo(-1));
+    expect(getMonthInfo(-1)).toEqual(expectedResult);
   });
 });
-describe('both offsets', () => {
+describe('should return correct month given week and month offsets', () => {
   it('both positive', () => {
     const expectedResult = [
       {
@@ -2057,7 +2057,7 @@ describe('both offsets', () => {
         isCurrentMonth: false,
       },
     ];
-    expect(expectedResult).toEqual(getMonthInfo(1, 1));
+    expect(getMonthInfo(1, 1)).toEqual(expectedResult);
   });
   it('both negative', () => {
     const expectedResult = [
@@ -2398,7 +2398,7 @@ describe('both offsets', () => {
         isCurrentMonth: false,
       },
     ];
-    expect(expectedResult).toEqual(getMonthInfo(-1, -1));
+    expect(getMonthInfo(-1, -1)).toEqual(expectedResult);
   });
   it('month negative, week positive', () => {
     const expectedResult = [
@@ -2739,7 +2739,7 @@ describe('both offsets', () => {
         isCurrentMonth: false,
       },
     ];
-    expect(expectedResult).toEqual(getMonthInfo(-1, 1));
+    expect(getMonthInfo(-1, 1)).toEqual(expectedResult);
   });
   it('month positive, week negative', () => {
     const expectedResult = [
@@ -3080,6 +3080,6 @@ describe('both offsets', () => {
         isCurrentMonth: false,
       },
     ];
-    expect(expectedResult).toEqual(getMonthInfo(1, -1));
+    expect(getMonthInfo(1, -1)).toEqual(expectedResult);
   });
 });
