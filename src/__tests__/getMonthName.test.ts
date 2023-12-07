@@ -9,35 +9,35 @@ afterAll(() => {
 });
 
 it('should return current month name info when has no arguments passed', () => {
-  expect('Apr').toEqual(getMonthName());
+  expect(getMonthName()).toEqual('Apr'); 
 });
 describe('should return correct month name info when passed week offset', () => {
   it('positive', () => {
-    expect('May').toEqual(getMonthName(undefined, 4));
+    expect(getMonthName(undefined, 4)).toEqual('May'); 
   });
   it('negative', () => {
-    expect('Mar').toEqual(getMonthName(undefined, -4));
+    expect(getMonthName(undefined, -4)).toEqual('Mar'); 
   });
 });
 describe('should return correct month name info when passed month offset', () => {
   it('positive', () => {
-    expect('May').toEqual(getMonthName(1));
+    expect(getMonthName(1)).toEqual('May'); 
   });
   it('negative', () => {
-    expect('Mar').toEqual(getMonthName(-1));
+    expect(getMonthName(-1)).toEqual('Mar'); 
   });
 });
 describe('should return correct month name info when passed week and month offset', () => {
   it('both positive', () => {
-    expect('Jun').toEqual(getMonthName(1, 4));
+    expect(getMonthName(1, 4)).toEqual('Jun'); 
   });
   it('both negative', () => {
-    expect('Feb').toEqual(getMonthName(-1, -4));
+    expect(getMonthName(-1, -4)).toEqual('Feb'); 
   });
   it('month positive, week negative', () => {
-    expect('May').toEqual(getMonthName(2, -4));
+    expect(getMonthName(2, -4)).toEqual('May'); 
   });
   it('month negative, week positive', () => {
-    expect('Apr').toEqual(getMonthName(-2, 8));
+    expect(getMonthName(-2, 8)).toEqual('Apr'); 
   });
 });

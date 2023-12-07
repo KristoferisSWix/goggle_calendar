@@ -30,7 +30,7 @@ it('returns styles with no overlap', () => {
     height: 50,
   });
 });
-it('returns styles with  overlap', () => {
+it('should return correct styles when two events overlap', () => {
   const data = {
     ...dataScheme,
     _timesOverlapping: 1,
