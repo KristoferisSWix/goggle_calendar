@@ -14,23 +14,29 @@ const Modal = ({ children, closeModal }: IModal) => {
   }
 
   useEffect(() => {
-    const modalRoot = document.getElementById('modal');
-    if (!modalRoot || !elRef.current) {
+    let modalRoot = document.getElementById('modal');
+    if (!modalRoot) {
+      modalRoot = document.createElement('div');
+      modalRoot.setAttribute('id', 'modal');
+      document.body.appendChild(modalRoot);
+    }
+    if (!elRef.current) {
       return;
     }
     modalRoot.appendChild(elRef.current);
     return () => {
       if (elRef.current) {
-        modalRoot.removeChild(elRef.current);
+        modalRoot?.removeChild(elRef.current);
       }
     };
   }, []);
 
   return createPortal(
     <div className={styles.overlay}>
+      modal
       <div className={styles.modal}>
         <div className={styles.header}>
-          <Button onClick={closeModal} size="small" id="close-modal-btn">
+          <Button onClick={closeModal} size="small" testId="modalCloseButton">
             <Image
               size="iconL"
               src="./images/xmark-icon.svg"

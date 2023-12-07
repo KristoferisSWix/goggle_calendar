@@ -1,8 +1,8 @@
 import { WEEK_LENGTH } from '../constants';
 
-const date = new Date();
-
 export default function getFullYear(monthOffset = 0, weekOffset = 0) {
+  const date = new Date();
+
   return new Date(
     date.getFullYear(),
     date.getMonth() + monthOffset,

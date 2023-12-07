@@ -29,26 +29,18 @@ const SidebarCalendarHeader = ({
 
   return (
     <section className={styles.header}>
-      <h5 className={styles.heading}>
-        {displayMonthName} {displayYear}
+      <h5 className={styles.heading} data-testid="sidebarCalendarDate">
+        {displayMonthName}, {displayYear}
       </h5>
       <div className={styles.controls}>
-        <Button
-          id="sidebar-calendar-previous-period"
-          onClick={handleClickPrev}
-          size="small"
-        >
+        <Button onClick={handleClickPrev} size="small" testId="prevMonthButton">
           <Image
             size="iconS"
             src="./images/chevron-left-icon.svg"
             alt="go to previous month"
           />
         </Button>
-        <Button
-          size="small"
-          id="sidebar-calendar-next-period"
-          onClick={handleClickNext}
-        >
+        <Button size="small" onClick={handleClickNext} testId="nextMonthButton">
           <Image
             size="iconS"
             src="./images/chevron-right-icon.svg"

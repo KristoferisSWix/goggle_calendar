@@ -18,13 +18,14 @@ const ModalEventCreation = ({ closeModal }: IModalEventCreation) => {
     message?: string;
   } | null>(null);
   const [, setUserEvents] = useContext(UserEventsContext);
-
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     (async () => {
       if (e.target instanceof HTMLFormElement) {
         const formData = new FormData(e.target);
-        const result = await formHandler(formData);
+        const formDataValues = [...formData.entries()];
+
+        const result = await formHandler(formDataValues);
         if (result?.status === 'error') {
           setError(result);
         } else {
@@ -40,6 +41,7 @@ const ModalEventCreation = ({ closeModal }: IModalEventCreation) => {
       onSubmit={handleSubmit}
       className={styles.modalEventCreation}
       id="modal-form"
+      data-testid="creationModal"
     >
       {error?.target === 'uncought' && (
         <p className={styles.error}>{error.message}</p>
@@ -58,7 +60,9 @@ const ModalEventCreation = ({ closeModal }: IModalEventCreation) => {
         />
       </FormOption>
       {error?.target === 'title' && (
-        <p className={styles.error}>{error.message}</p>
+        <p data-testid="titleError" className={styles.error}>
+          {error.message}
+        </p>
       )}
       <FormOption
         id="event-time"
@@ -85,7 +89,9 @@ const ModalEventCreation = ({ closeModal }: IModalEventCreation) => {
         />
       </FormOption>
       {error?.target === 'time' && (
-        <p className={styles.error}>{error.message}</p>
+        <p data-testid="timeError" className={styles.error}>
+          {error.message}
+        </p>
       )}
       <FormOption
         id="event-guest"
@@ -236,7 +242,7 @@ const ModalEventCreation = ({ closeModal }: IModalEventCreation) => {
         <Button type="button" skin="simple">
           More options
         </Button>
-        <Button skin="standard" id="save-event-btn">
+        <Button skin="standard" testId="saveEventButton">
           Save
         </Button>
       </div>

@@ -1,13 +1,13 @@
 import { WEEK_LENGTH } from '../constants';
 import { FullMonthNames } from '../types';
 
-const date = new Date();
-
 export default function getMonthName(
   monthOffset = 0,
   weekOffset = 0,
-  month = date.getMonth()
+  month = new Date().getMonth()
 ) {
+  const date = new Date();
+
   month = new Date(
     date.getFullYear(),
     date.getMonth() + monthOffset,
